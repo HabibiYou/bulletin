@@ -24,8 +24,8 @@ const Room = () => {
             })
     }, []);
 
-    // console.log(typeof(users))
-    // console.log(users)
+    console.log(typeof(users))
+    console.log(users)
 
 
 

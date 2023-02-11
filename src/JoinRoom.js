@@ -29,7 +29,6 @@ const JoinRoom = () => {
                 })
                 .then((d) => {
                     setData(d)
-                    console.log(data)
                 })
     }
 
@@ -40,29 +39,36 @@ const JoinRoom = () => {
     }, [])
 
     const createUser = () => {
-        const newId = "user11234"
-        const newUser = { newId, firstName, lastName, ig }
+        const id = 5
+        const first_name = firstName
+        const last_name = lastName
+        const instagram = ig
+        const newUser = { id, first_name, last_name, instagram }
         return newUser
     }
 
 
     const addMeToRoom = () => {
-        const newUser = createUser();
+        
         // add ourselves to the list
-        data[roomID].push(newUser)
-        fetch('http://localhost:8000/Rooms', {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        }).then(() => {
-            console.log("added")
-            navigate(`/room/${roomID}`)
-        })
+        if(allParamsFilled()){
+            const newUser = createUser();
+            data[roomID].push(newUser)
+            fetch('http://localhost:8000/Rooms', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            }).then(() => {
+                console.log("added")
+                navigate(`/room/${roomID}`)
+            })
+        }
+
     }
 
     function allParamsFilled() {
         console.log(firstName, lastName, ig)
-        if (firstName.length > 0 && lastName.length > 0 && ig.length > 0) {
+        if (firstName.length > 1 && lastName.length > 1 && ig.length > 1) {
             console.log(true)
             return true
         }
