@@ -5,18 +5,15 @@ import './Home.css';
 
 
 const JoinRoom = () => {
+    //get room id from url param
     const { roomID } = useParams()
-
+    //Inital vals for the user info
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [ig, setIg] = useState("")
-
-
-    const [users, setUsers] = useState(null);
+    
+    // initally the data will be null bc we havem't reached the server
     const [data, setData] = useState(null);
-    const [canJoin, setCanJoin] = useState(false);
-
-    const [room, setRoom] = useState("")
 
     const navigate = useNavigate();
 
@@ -38,6 +35,7 @@ const JoinRoom = () => {
 
     }, [])
 
+    //Create user with same params as the JSON
     const createUser = () => {
         const id = 5
         const first_name = firstName
@@ -60,12 +58,15 @@ const JoinRoom = () => {
                 body: JSON.stringify(data)
             }).then(() => {
                 console.log("added")
-                navigate(`/room/${roomID}`)
+                navigate(`/room/${roomID}`,
+                {newData:data}
+                )
             })
         }
 
     }
 
+    //check to make sure inputs are valid
     function allParamsFilled() {
         console.log(firstName, lastName, ig)
         if (firstName.length > 1 && lastName.length > 1 && ig.length > 1) {
