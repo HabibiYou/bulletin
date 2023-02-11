@@ -7,16 +7,13 @@ const UserList = ({ users }) => {
     return (
         <div className="room">
             <h1>People</h1>
-            {users.map((user) => (
-                <div >
-
-                    {
-                    <ListGroup key = {user.id}>
-                        <ListGroup.Item>{user.first_name} {user.last_name} <a href={makeIGLink(user.instagram)}> <img src={logo}></img></a></ListGroup.Item>
-                    </ListGroup>
-                    }
+            <ListGroup>
+            {users.map((user,i) => (
+                <div key= {i}>
+                    {<ListGroup.Item >{user.first_name} {user.last_name} <a href={makeIGLink(user.instagram)}> <img src={logo}></img></a></ListGroup.Item>}
                 </div>
             ))}
+            </ListGroup>
 
 
         </div>
