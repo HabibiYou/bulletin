@@ -1,1 +1,16 @@
-.room {background-color: coral;}
+.room {
+    background-color: rgb(255, 255, 255);
+    border: 5px solid darkblue;
+    border-radius: 20px;
+    width: 350px;
+    height: fit-content;
+    align-items: center;
+}
+
+.icon{
+    scale: .8;
+}
+
+.itemList{
+    align-items: center;
+}

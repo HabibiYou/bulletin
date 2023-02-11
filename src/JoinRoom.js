@@ -69,7 +69,7 @@ const JoinRoom = () => {
     //check to make sure inputs are valid
     function allParamsFilled() {
         console.log(firstName, lastName, ig)
-        if (firstName.length > 1 && lastName.length > 1 && ig.length > 1) {
+        if (firstName.length > 0 && lastName.length > 0 && ig.length > 0) {
             console.log(true)
             return true
         }
