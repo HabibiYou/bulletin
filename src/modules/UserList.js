@@ -38,7 +38,7 @@ const UserList = ({ users }) => {
                                 </ListItemAvatar>
                                 <ListItemAvatar>
 
-                                    <a href={makeTwitterLink(user.instagram)}>
+                                    <a href={makeTwitterLink(user.twitter)}>
                                         <Avatar className="icon" src={twitter_icon}></Avatar>
                                     </a>
 

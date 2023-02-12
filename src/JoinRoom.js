@@ -11,6 +11,7 @@ const JoinRoom = () => {
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [ig, setIg] = useState("")
+    const [twitter, setTwitter] = useState("")
     
     // initally the data will be null bc we havem't reached the server
     const [data, setData] = useState(null);
@@ -41,7 +42,7 @@ const JoinRoom = () => {
         const first_name = firstName
         const last_name = lastName
         const instagram = ig
-        const newUser = { id, first_name, last_name, instagram }
+        const newUser = { id, first_name, last_name, instagram, twitter }
         return newUser
     }
 
@@ -68,8 +69,9 @@ const JoinRoom = () => {
 
     //check to make sure inputs are valid
     function allParamsFilled() {
-        console.log(firstName, lastName, ig)
-        if (firstName.length > 0 && lastName.length > 0 && ig.length > 0) {
+        console.log(firstName, lastName, ig, twitter)
+        if (firstName.length > 0 && lastName.length > 0 
+            && ig.length > 0 && twitter.length > 0) {
             console.log(true)
             return true
         }
@@ -93,9 +95,14 @@ const JoinRoom = () => {
                     <label htmlFor="lastname" className="placeholder">Last name</label>
                 </div>
                 <div className="input-container ic2">
-                    <input id="email" className="input" type="text" placeholder=" " onChange={(i) => setIg(i.target.value)} />
+                    <input id="instagram" className="input" type="text" placeholder=" " onChange={(i) => setIg(i.target.value)} />
                     <div className="cut cut-short"></div>
-                    <label htmlFor="email" className="placeholder">Instagram</label>
+                    <label htmlFor="instagram" className="placeholder">Instagram</label>
+                </div>
+                <div className="input-container ic2">
+                    <input id="twitter" className="input" type="text" placeholder=" " onChange={(i) => setTwitter(i.target.value)} />
+                    <div className="cut cut-short"></div>
+                    <label htmlFor="twitter" className="placeholder">Twitter</label>
                 </div>
                 <button type="text" className="submit" onClick={() => addMeToRoom()}>Join</button>
 
