@@ -2,7 +2,6 @@ import UserItem from "./UserItem";
 import ListGroup from 'react-bootstrap/ListGroup';
 import instagram_icon from './res/instagram_icon.png'
 import twitter_icon from './res/twitter_icon.png'
-import avatar from './res/smile_face_icon.png'
 
 
 
@@ -19,9 +18,8 @@ import '../Room.css'
 const UserList = ({ users }) => {
     return (
         <div>
-
-
-            <div className="main_background">
+                <div className="title">People</div>
+            <div>
                 <List>
 
                     {users.map((user, i) => (

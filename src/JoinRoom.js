@@ -31,8 +31,9 @@ const JoinRoom = () => {
         <div className='body'>
             <div className="form">
                 <div className="title text">Join a room</div>
-                {/* <div className="subtitle text">Join a room</div> */}
+                <div className="subtitle text"></div>
                 <div className="input-container ic2">
+                    {/* Everytime we change the room we want to check if it exists */}
                     <input id="room" className="input" type="text" onChange={r => doesRoomExist(data, r.target.value, setCanJoin, setRoom, setPlaceholderText)} placeholder=" " />
                     <div className="cut cut-short"></div>
                     <label htmlFor="room" className={placeholderText}>Room code</label>

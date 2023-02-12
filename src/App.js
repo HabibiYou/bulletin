@@ -3,6 +3,7 @@ import Home from './Home';
 import Room from './Room';
 import JoinRoom from './JoinRoom';
 import JoinRoomWithInfo from './JoinRoomWithInfo';
+import CreateRoom from './CreateRoom';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Routes >
         <Route path ='/' element = {<Home />}></Route>
         <Route path ='/join' element = {<JoinRoom />}></Route>
+        <Route path ='/create' element = {<CreateRoom />}></Route>
         <Route path ='/room/:roomID' element = {<Room />}></Route>
         <Route path ='/room/:roomID/join' element = {<JoinRoomWithInfo />}></Route>
 

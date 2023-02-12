@@ -13,6 +13,8 @@
     height: fit-content;
     padding: 20px;
     width: 320px;
+    align-items: center;
+
   }
 
   .listItem{
@@ -20,4 +22,28 @@
     border: 5px solid black;
     border-radius: 20px;
     margin-top: 10px;
+    align-items: center;
+  }
+
+  .center{
+    text-align: center;
+  }
+
+  .avatar{
+    scale:1.4;
+  }
+
+  .add_me_button{
+    background-color: #08d;
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 18px;
+    height: 30px;
+    margin: 20px;
+    outline: 0;
+    text-align: center;
+    width: 60%;
   }
