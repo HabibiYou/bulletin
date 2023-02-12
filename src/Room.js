@@ -19,7 +19,6 @@ const Room = (newData = null) => {
 
 
     useEffect(() => {
-        console.log(newData.newData)
         //Check if we already have data to optimize fetching again
         if (newData.newData == null) {
             fetch('http://localhost:8000/Rooms')
@@ -34,7 +33,6 @@ const Room = (newData = null) => {
         else{
             setUsers(data)
         }
-        console.log(users)
     }, []);
 
     return (
