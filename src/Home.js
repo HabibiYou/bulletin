@@ -55,12 +55,12 @@ function doesRoomExist(data, room, setCanJoin, setRoom, setPlaceholderText) {
     if (data[room]) {
         console.log("can join")
         setCanJoin(true)
-        setPlaceholderText("placeholder text correct")
+        setPlaceholderText("placeholder correct")
     }
     else {
         console.log("cant join")
         setCanJoin(false)
-        setPlaceholderText("placeholder text notCorrect")
+        setPlaceholderText("placeholder notCorrect")
     }
     setRoom(room)
 }
