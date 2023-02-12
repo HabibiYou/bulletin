@@ -1,16 +1,23 @@
-.room {
-    background-color: rgb(255, 255, 255);
-    border: 5px solid darkblue;
-    border-radius: 20px;
-    width: 350px;
-    height: fit-content;
-    align-items: center;
-}
-
 .icon{
-    scale: .8;
+    scale: .9;    
 }
 
 .itemList{
     align-items: center;
 }
+
+.main_background {
+    background-color: #15172b;
+    border-radius: 20px;
+    box-sizing: border-box;
+    height: fit-content;
+    padding: 20px;
+    width: 320px;
+  }
+
+  .listItem{
+    background-color: #8c95f3;
+    border: 5px solid black;
+    border-radius: 20px;
+    margin-top: 10px;
+  }

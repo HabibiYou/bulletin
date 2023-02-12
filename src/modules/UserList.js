@@ -18,60 +18,41 @@ import '../Room.css'
 
 const UserList = ({ users }) => {
     return (
+        <div>
 
 
+            <div className="main_background">
+                <List>
+
+                    {users.map((user, i) => (
+                        <div key={i}>
+                            <ListItem className="listItem">
+                                <ListItemText
+                                    primary={user.first_name + " " + user.last_name}
+                                    secondary=''
+                                />
+                                <ListItemAvatar>
+                                    <a href={makeIGLink(user.instagram)}>
+                                        <Avatar className="icon" src={instagram_icon}></Avatar>
+                                    </a>
+                                </ListItemAvatar>
+                                <ListItemAvatar>
+
+                                    <a href={makeTwitterLink(user.instagram)}>
+                                        <Avatar className="icon" src={twitter_icon}></Avatar>
+                                    </a>
+
+                                </ListItemAvatar>
+                            </ListItem>
 
 
+                        </div>
+                    ))}
 
 
-        <div className="room">
-            <List>
+                </List>
 
-                {users.map((user, i) => (
-                    <div key={i}>
-                        <ListItem>
-                        <ListItemText
-                                primary={user.first_name +" "+  user.last_name}
-                                secondary=''
-                            />
-                            <ListItemAvatar>
-                            <a href={makeIGLink(user.instagram)}> 
-                                <Avatar src={instagram_icon}></Avatar>
-                                </a>                                        
-                            </ListItemAvatar>
-                            <ListItemAvatar>
-                                
-                                <a href={makeIGLink(user.instagram)}> 
-                                <Avatar src={twitter_icon}></Avatar>
-                                </a>                                
-                                
-                            </ListItemAvatar>
-                        </ListItem>
-                         
-
-                    </div>
-                ))}
-
-
-            </List>
-
-
-
-
-
-
-            {/* <h1>People</h1>
-            <ListGroup className="itemList">
-            {users.map((user,i) => (
-                <div key= {i}>
-                    {<ListGroup.Item >
-                        {user.first_name} {user.last_name} <a href={makeIGLink(user.instagram)}> <img className = "icon" src={logo}></img></a>
-                        </ListGroup.Item>}
-                </div>
-            ))}
-            </ListGroup> */}
-
-
+            </div>
         </div>
     );
 }
@@ -79,6 +60,10 @@ const UserList = ({ users }) => {
 function makeIGLink(ig) {
     return `https://www.instagram.com/${ig}/`
 
+}
+
+function makeTwitterLink(t){
+    return `https://twitter.com/${t}`
 }
 
 export default UserList;

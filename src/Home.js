@@ -28,7 +28,7 @@ const Home = () => {
 
 
     return (
-        <div>
+        <div className='body'>
             <div className="form">
                 <div className="title">Welcome to Bulletin</div>
                 <div className="subtitle">Join a room</div>
