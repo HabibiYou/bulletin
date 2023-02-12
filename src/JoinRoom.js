@@ -48,7 +48,6 @@ const JoinRoom = () => {
 
 
     const addMeToRoom = () => {
-        
         // add ourselves to the list
         if(allParamsFilled()){
             const newUser = createUser();
@@ -69,7 +68,6 @@ const JoinRoom = () => {
 
     //check to make sure inputs are valid
     function allParamsFilled() {
-        console.log(firstName, lastName, ig, twitter)
         if (firstName.length > 0 && lastName.length > 0 
             && ig.length > 0 && twitter.length > 0) {
             console.log(true)
@@ -104,8 +102,8 @@ const JoinRoom = () => {
                     <div className="cut cut-short"></div>
                     <label htmlFor="twitter" className="placeholder">Twitter</label>
                 </div>
-                <button type="text" className="submit" onClick={() => addMeToRoom()}>Join</button>
-
+                {allParamsFilled() && <button type="text" className="submit" onClick={() => addMeToRoom()}>Join</button>}
+                {!allParamsFilled() && <button type="text" className="submit" disabled >Join</button>}
                 <br></br>
             </div>
 

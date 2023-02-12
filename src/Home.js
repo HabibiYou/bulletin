@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import UserList from './modules/UserList';
-import {useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import './Home.css';
 
 const Home = () => {
 
-    const [users, setUsers] = useState(null);
     const [data, setData] = useState(null);
     const [canJoin, setCanJoin] = useState(false);
+
+    const [placeholderText, setPlaceholderText] = useState("placeholder text notCorrect")
 
     const [room, setRoom] = useState("")
 
@@ -30,17 +30,17 @@ const Home = () => {
     return (
         <div className='body'>
             <div className="form">
-                <div className="title">Welcome to Bulletin</div>
-                <div className="subtitle">Join a room</div>
+                <div className="title text">Welcome to Bulletin</div>
+                <div className="subtitle text">Join a room</div>
                 <div className="input-container ic2">
-                    <input id="room" className="input" type="text" onChange={r => doesRoomExist(data,r.target.value, setCanJoin, setRoom)} placeholder=" " />
+                    <input id="room" className="input" type="text" onChange={r => doesRoomExist(data, r.target.value, setCanJoin, setRoom, setPlaceholderText)} placeholder=" " />
                     <div className="cut cut-short"></div>
-                    <label htmlFor="room" className="placeholder">Room Number</label>
+                    <label htmlFor="room" className={placeholderText}>Room Number</label>
                 </div>
                 {/* Disable Join Button unless they type in a good Room number */}
-                {!canJoin && <button type="text" className="submit" disabled>Join</button>}
-                {canJoin && <button type="text" className="submit" onClick={() => 
-                
+                {!canJoin && <button type="text" className="submit text" disabled>Join</button>}
+                {canJoin && <button type="text" className="submit text" onClick={() =>
+
                     navigate(`/room/${room}/join`)}>Join</button>}
 
                 <br></br>
@@ -51,13 +51,17 @@ const Home = () => {
     );
 }
 
-function doesRoomExist(data, room, setCanJoin, setRoom) {
+function doesRoomExist(data, room, setCanJoin, setRoom, setPlaceholderText) {
     if (data[room]) {
-        console.log("can join") 
-        setCanJoin(true) }
-    else { 
-        console.log("cant join") 
-        setCanJoin(false) }
+        console.log("can join")
+        setCanJoin(true)
+        setPlaceholderText("placeholder text correct")
+    }
+    else {
+        console.log("cant join")
+        setCanJoin(false)
+        setPlaceholderText("placeholder text notCorrect")
+    }
     setRoom(room)
 }
 

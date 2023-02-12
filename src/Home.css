@@ -76,7 +76,7 @@ body {
 }
 
 .cut-short {
-  width: 50px;
+  width: 100px;
 }
 
 .input:focus ~ .cut,
@@ -105,8 +105,12 @@ body {
   color: #808097;
 }
 
-.input:focus ~ .placeholder {
+.input:focus ~ .notCorrect {
   color: #dc2f55;
+}
+
+.input:focus ~ .correct {
+  color: #64fe53;
 }
 
 .submit {
@@ -126,4 +130,8 @@ body {
 
 .submit:active {
   background-color: #06b;
+}
+
+.submit:disabled {
+  background-color: rgb(5, 70, 122);
 }
