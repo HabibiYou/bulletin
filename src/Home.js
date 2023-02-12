@@ -2,67 +2,20 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Home.css';
 
+//Home menu 
 const Home = () => {
-
-    const [data, setData] = useState(null);
-    const [canJoin, setCanJoin] = useState(false);
-
-    const [placeholderText, setPlaceholderText] = useState("placeholder text notCorrect")
-
-    const [room, setRoom] = useState("")
-
     const navigate = useNavigate();
-
-
-    useEffect(() => {
-        fetch('http://localhost:8000/Rooms')
-            .then(res => {
-                return res.json();
-            })
-            .then((data) => {
-                setData(data);
-            })
-    }, []);
-
-
-
-
     return (
         <div className='body'>
             <div className="form">
-                <div className="title text">Welcome to Bulletin</div>
-                <div className="subtitle text">Join a room</div>
-                <div className="input-container ic2">
-                    <input id="room" className="input" type="text" onChange={r => doesRoomExist(data, r.target.value, setCanJoin, setRoom, setPlaceholderText)} placeholder=" " />
-                    <div className="cut cut-short"></div>
-                    <label htmlFor="room" className={placeholderText}>Room Number</label>
-                </div>
-                {/* Disable Join Button unless they type in a good Room number */}
-                {!canJoin && <button type="text" className="submit text" disabled>Join</button>}
-                {canJoin && <button type="text" className="submit text" onClick={() =>
-
-                    navigate(`/room/${room}/join`)}>Join</button>}
-
+                <div className="title text">Bulletin</div>
+                <button type="text" className="submit text" onClick={() => navigate(`/join`)}>Join</button>
+                <button type="text" className="submit text" onClick={() => navigate(`/create`)}>Create a room</button>
                 <br></br>
             </div>
-
         </div>
 
     );
-}
-
-function doesRoomExist(data, room, setCanJoin, setRoom, setPlaceholderText) {
-    if (data[room]) {
-        console.log("can join")
-        setCanJoin(true)
-        setPlaceholderText("placeholder correct")
-    }
-    else {
-        console.log("cant join")
-        setCanJoin(false)
-        setPlaceholderText("placeholder notCorrect")
-    }
-    setRoom(room)
 }
 
 
