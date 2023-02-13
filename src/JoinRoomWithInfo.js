@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+
 import './Home.css';
 
 
@@ -57,9 +58,10 @@ const JoinRoomWithInfo = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)
             }).then(() => {
-                console.log("added")
+                console.log("added with ", data)
+                //TODO fix optimization
                 navigate(`/room/${roomID}`,
-                {newData:data}
+                {data}
                 )
             })
         }

@@ -19,36 +19,63 @@ const Room = (newData = null) => {
 
 
     useEffect(() => {
-        //Check if we already have data to optimize fetching again
-        if (newData.newData == null) {
-            fetch('http://localhost:8000/Rooms')
-                .then(res => {
-                    return res.json();
-                })
-                .then((data) => {
-                    setData(data);
-                    setUsers(data[roomID])
-                })
-        }
-        else{
-            setUsers(data)
-        }
+        fetch('http://localhost:8000/Rooms')
+            .then(res => {
+                return res.json();
+            })
+            .then((data) => {
+                setData(data);
+                setUsers(data[roomID])
+            })
+
+
+
+        // //Check if we already have data to optimize fetching again
+        // console.log(data)
+        // console.log(newData)
+        // //TODO i think this does not work for optimizing
+        // if (newData == null) {
+        //     fetch('http://localhost:8000/Rooms')
+        //         .then(res => {
+        //             return res.json();
+        //         })
+        //         .then((data) => {
+        //             setData(data);
+        //             setUsers(data[roomID])
+        //         })
+
+
+        // }
+        // else {
+        //     console.log("saveddd")
+        //     console.log(newData)
+        //     setData(newData)
+        //     setUsers(data[roomID])
+        // }
+
     }, []);
+
+    useEffect(() => {
+        if (data && data[roomID] == null) {
+            navigate(`/room-not-found`)
+        }
+
+    }, [data])
 
     return (
         <div className='main_background'>
             {users && users.length > 0 && <UserList users={users} />}
 
-            {users && users.length ==0 &&
-            <div className='listItem'>
-                <div className='center'>
-                    <h2 >Nobody is here...</h2>
-                    <h2 >yet!</h2>
-                    <img className='avatar' src={avatar}/>
-                    <br></br>
-                    <button type="text" className="add_me_button" onClick={() => navigate(`/room/${roomID}/join`)}>Add my social</button>
+            {users && users.length == 0 &&
+                <div className='listItem'>
+                    <div className='center'>
+                        <h2 >Nobody is here...</h2>
+                        <h2 >yet!</h2>
+                        <img className='avatar' src={avatar} />
+                        <br></br>
+                        <button type="text" className="add_me_button" onClick={() => navigate(`/room/${roomID}/join`)}>Add my social</button>
+                    </div>
                 </div>
-            </div>
             }
         </div>
     );
