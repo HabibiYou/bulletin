@@ -60,9 +60,7 @@ const JoinRoomWithInfo = () => {
             }).then(() => {
                 console.log("added with ", data)
                 //TODO fix optimization
-                navigate(`/room/${roomID}`,
-                {data}
-                )
+                navigate(`/room/${roomID}`)
             })
         }
 
