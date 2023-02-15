@@ -8,7 +8,7 @@ body {
   background-color: #000;
   display: flex;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .form {
@@ -134,4 +134,14 @@ body {
 
 .submit:disabled {
   background-color: rgb(5, 70, 122);
+}
+.center{
+  text-align: center;
+}
+.skip_button{
+  text-transform: unset !important;
+  font-size: 1px;
+  text-align: center;
+  color: #eee;
+
 }

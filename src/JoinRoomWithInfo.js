@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import Button from '@mui/material/Button';
+
 
 import './Home.css';
 
@@ -52,7 +54,7 @@ const JoinRoomWithInfo = () => {
         // add ourselves to the list
         if(allParamsFilled()){
             const newUser = createUser();
-            data[roomID].push(newUser)
+            data[roomID].users.push(newUser)
             fetch('http://localhost:8000/Rooms', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -104,6 +106,9 @@ const JoinRoomWithInfo = () => {
                 </div>
                 {allParamsFilled() && <button type="text" className="submit" onClick={() => addMeToRoom()}>Join</button>}
                 {!allParamsFilled() && <button type="text" className="submit" disabled >Join</button>}
+                <div className='center'>
+                <Button variant="text" className='skip_button' onClick={() => navigate(`/room/${roomID}`)}>Join without adding</Button>
+                </div>
                 <br></br>
             </div>
 

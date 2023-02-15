@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import './Home.css';
 
 const CreateRoom = () => {
-
-
     const [room, setRoom] = useState("")
+    const [newRoomName, setNewRoomName] = useState("")
     const [canCreate, setCanCreate] = useState(false);
 
     // initally the data will be null bc we havem't reached the server
@@ -37,21 +35,19 @@ const CreateRoom = () => {
 
     //Create Room with same params as the JSON
     const createRoom = () => {
-        const newRoom = { room: [] }
-        return newRoom
+        data[room] = {roomName: `${newRoomName}`,users:[]}
+        
     }
 
     const addMyRoom = () => {
-        data[room] = []
+        createRoom()
         fetch('http://localhost:8000/Rooms', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         }).then(() => {
             console.log("added")
-            navigate(`/room/${room}`,
-                { newData: data }
-            )
+            navigate(`/room/${room}`)
         })
 
     }
@@ -66,6 +62,12 @@ const CreateRoom = () => {
                     onChange={(r)=>doesRoomExist(data,r.target.value,setCanCreate,setRoom,setPlaceholderText)} />
                     <div className="cut"></div>
                     <label htmlFor="room" className={placeholderText}>Room ID</label>
+                </div>
+                <div className="input-container ic1">
+                    <input id="roomName" className="input" type="text" placeholder=" " 
+                    onChange={(r)=> setNewRoomName(r.target.value)} />
+                    <div className="cut"></div>
+                    <label htmlFor="roomName" className={placeholderText}>Room Name</label>
                 </div>
                 {!canCreate && <button type="text" className="submit" disabled >Create</button>}
                 {canCreate && <button type="text" className="submit" onClick={() => addMyRoom()} >Create</button>}

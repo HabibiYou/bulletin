@@ -2,6 +2,11 @@
     scale: .9;    
 }
 
+.copy_icon{
+  scale: .6;
+  padding-left: 5px;
+}
+
 .itemList{
     align-items: center;
 }
