@@ -1,6 +1,6 @@
 # Actual steps to run this
 
-## PRE-REQ install all node_modules
+## PRE-REQs install all node_modules
 
 you will need to install all the node modules. 
 
