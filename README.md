@@ -1,7 +1,15 @@
 # Actual steps to run this
 
+## PRE-REQ install all node_modules
 
-We will need multiple terminals to run it.
+you will need to install all the node modules. 
+
+Do this by running `npm install` and it install them all.
+
+be sure to be in the correct dir.
+
+
+Next, We will need multiple terminals to run it. so create 
 
 ## terminal 1: Create the fake server
 
@@ -23,6 +31,8 @@ To start our app, in a seperate terminal run:
 `npm start`
 
 be sure to be in the correct dir, so within /bulletin
+
+be sure to have a third terminal to just have as you develop so you don't need to shut off the server or react app.
 
 ## begin to see the work
 
