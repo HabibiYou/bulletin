@@ -9,45 +9,43 @@ import Button from '@mui/material/IconButton';
 import Snackbar from '@mui/material/Snackbar';
 import UserList from './modules/UserList'
 
-//newData is to keep track if we received something
-//  If a user comes to the link they will find all users
-//  if a user comes from join, we don't need to fetch
+/*
+Component for /room/roomID
+
+
+*/
+
 const Room = () => {
-    const { roomID } = useParams()
-    const [roomName, setRoomName] = useState("");
-    const [copied, setCopied] = useState(false);
-    const [users, setUsers] = useState(null);
-    const [data, setData] = useState(null);
+
+    const { roomID } = useParams() // gets the roomID from the URL ex: ...com/room/01932 roomID is 01932
+
+    const [roomName, setRoomName] = useState(""); // the room name from the json
+    const [copied, setCopied] = useState(false); // used to bring up the snackbar that says "u copied a link"
+    const [users, setUsers] = useState(null); // the list of users  
 
     const navigate = useNavigate();
 
-
+    //This happens once in the beggining, because it happens 
+    // after every dependency in the list changes, the list is empty as u see on line ~44
     useEffect(() => {
+        //fetch from this link ...
         fetch('http://localhost:8000/Rooms')
             .then(res => {
-                return res.json();
+                return res.json(); // ..return the result as a json 
             })
-            .then((data) => {
-                setData(data);
-                if (data.hasOwnProperty(roomID)) {
+            .then((data) => { // .. takes the return as (data) from 2 lines up and 
+                if (data.hasOwnProperty(roomID)) { // if the room exists then set the vars to be correct
                     setRoomName(data[roomID].roomName)
                     setUsers(data[roomID].users)
-
                 }
-
-                
+                else { // if the room does not exist then navigate to the /room-not-found link
+                    navigate(`/room-not-found`)
+                }
             })
 
     }, []);
 
-    useEffect(() => {
-        if (data && !data.hasOwnProperty(roomID)) {
-            navigate(`/room-not-found`)
-        }
-
-    }, [data])
-
-
+    //This is the function to copy strings to the keyboard
     const copy = async () => {
         console.log("copied")
         setCopied(true);
@@ -56,11 +54,13 @@ const Room = () => {
 
     return (
         <div className='main_background'>
+
             <div className="title">
                 Welcome
                 <br></br>
                 {roomName}
             </div>
+
             <Button size='small' onClick={() => copy()}>
                 <div className="subtitle">
                     Room ID: {roomID}
@@ -68,8 +68,13 @@ const Room = () => {
                 </div>
             </Button>
 
-            {users && users.length > 0 && <UserList users={users} />}
+            {/* If the users exist and there is atleast one person,
+             generate the users with the UserList component */}
+            {users && users.length > 0 &&
+                <UserList users={users} />}
 
+            {/* If the users exist and there is no one,
+             show the no one "no one is here yet" screen. */}
             {users && users.length === 0 &&
                 <div className='listItem'>
                     <div className='center'>
@@ -81,12 +86,13 @@ const Room = () => {
                     </div>
                 </div>
             }
+            {/* This is the pop up for when you copy the room id */}
             <Snackbar
-        open={copied}
-        autoHideDuration={1200}
-        onClose={() => setCopied(false)}
-        message="Copied Room Link!"
-      />
+                open={copied}
+                autoHideDuration={1200}
+                onClose={() => setCopied(false)}
+                message="Copied Room Link!"
+            />
         </div>
     );
 }

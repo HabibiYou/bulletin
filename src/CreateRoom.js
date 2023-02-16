@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import './Home.css';
 
 const CreateRoom = () => {
-    const [room, setRoom] = useState("")
+    const [roomID, setRoomID] = useState("")
     const [newRoomName, setNewRoomName] = useState("")
-    const [canCreate, setCanCreate] = useState(false);
+    const [canCreate, setCanCreate] = useState(false); // is true when valid inputs to create a room
 
-    // initally the data will be null bc we havem't reached the server
+    // initally the data will be null bc we haven't reached the server
     const [data, setData] = useState(null);
 
     const [placeholderText, setPlaceholderText] = useState("placeholder text notCorrect")
@@ -28,6 +28,7 @@ const CreateRoom = () => {
     }
 
     //GET ROOM DATA AS SOON AS WE INIT
+    // useEffect runs once bc no deps in the list
     useEffect(() => {
         getRoomData()
 
@@ -35,19 +36,19 @@ const CreateRoom = () => {
 
     //Create Room with same params as the JSON
     const createRoom = () => {
-        data[room] = {roomName: `${newRoomName}`,users:[]}
+        data[roomID] = {roomName: `${newRoomName}`,users:[]}
         
     }
 
     const addMyRoom = () => {
-        createRoom()
+        createRoom() // since this edits our const data we can just use that in the POST req
         fetch('http://localhost:8000/Rooms', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         }).then(() => {
             console.log("added")
-            navigate(`/room/${room}`)
+            navigate(`/room/${roomID}`)
         })
 
     }
@@ -59,7 +60,7 @@ const CreateRoom = () => {
                 <div className="subtitle"></div>
                 <div className="input-container ic1">
                     <input id="room" className="input" type="text" placeholder=" " 
-                    onChange={(r)=>doesRoomExist(data,r.target.value,setCanCreate,setRoom,setPlaceholderText)} />
+                    onChange={(r)=>doesRoomExist(data,r.target.value,setCanCreate,setRoomID,setPlaceholderText)} />
                     <div className="cut"></div>
                     <label htmlFor="room" className={placeholderText}>Room ID</label>
                 </div>
@@ -79,10 +80,11 @@ const CreateRoom = () => {
     );
 }
 
-function doesRoomExist(data, room, setCanCreate, setRoom, setPlaceholderText) {
-    setRoom(room)
-    console.log(room)
-    if (data[room]) {
+// check and make sure room exist
+function doesRoomExist(data, roomID, setCanCreate, setRoomID, setPlaceholderText) {
+    setRoomID(roomID)
+    console.log(roomID)
+    if (data[roomID]) {
         console.log("cant create")
         setCanCreate(false)
         // TODO will need to move these Text functions to a different function to check if valid

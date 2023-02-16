@@ -1,0 +1,198 @@
+{
+  "Rooms": {
+    "1123": {
+      "roomName": "yangerrrr",
+      "users": []
+    },
+    "abc": {
+      "roomName": "The Fam",
+      "users": [
+        {
+          "id": 1,
+          "first_name": "Youssef",
+          "last_name": "Bourouphael",
+          "instagram": "mid2oceans",
+          "twitter": "mid2oceans"
+        },
+        {
+          "id": 2,
+          "first_name": "Mariam",
+          "last_name": "Duran",
+          "instagram": "mariamduraa",
+          "twitter": "sportscenter"
+        },
+        {
+          "id": 3,
+          "first_name": "Anubhav",
+          "last_name": "Adhikari",
+          "instagram": "anubhav_adhikari",
+          "twitter": "mid2oceans"
+        },
+        {
+          "id": 5,
+          "first_name": "Robert",
+          "last_name": "Bourouphael",
+          "instagram": "aa",
+          "twitter": "ww"
+        },
+        {
+          "id": 1,
+          "first_name": "Youssef",
+          "last_name": "Bourouphael",
+          "instagram": "mid2oceans",
+          "twitter": "mid2oceans"
+        },
+        {
+          "id": 2,
+          "first_name": "Mariam",
+          "last_name": "Duran",
+          "instagram": "mariamduraa",
+          "twitter": "sportscenter"
+        },
+        {
+          "id": 3,
+          "first_name": "Anubhav",
+          "last_name": "Adhikari",
+          "instagram": "anubhav_adhikari",
+          "twitter": "mid2oceans"
+        },
+        {
+          "id": 5,
+          "first_name": "Robert",
+          "last_name": "Bourouphael",
+          "instagram": "aa",
+          "twitter": "ww"
+        },
+        {
+          "id": 1,
+          "first_name": "Youssef",
+          "last_name": "Bourouphael",
+          "instagram": "mid2oceans",
+          "twitter": "mid2oceans"
+        },
+        {
+          "id": 2,
+          "first_name": "Mariam",
+          "last_name": "Duran",
+          "instagram": "mariamduraa",
+          "twitter": "sportscenter"
+        },
+        {
+          "id": 3,
+          "first_name": "Anubhav",
+          "last_name": "Adhikari",
+          "instagram": "anubhav_adhikari",
+          "twitter": "mid2oceans"
+        },
+        {
+          "id": 5,
+          "first_name": "Robert",
+          "last_name": "Bourouphael",
+          "instagram": "aa",
+          "twitter": "ww"
+        },
+        {
+          "id": 1,
+          "first_name": "Youssef",
+          "last_name": "Bourouphael",
+          "instagram": "mid2oceans",
+          "twitter": "mid2oceans"
+        },
+        {
+          "id": 2,
+          "first_name": "Mariam",
+          "last_name": "Duran",
+          "instagram": "mariamduraa",
+          "twitter": "sportscenter"
+        },
+        {
+          "id": 3,
+          "first_name": "Anubhav",
+          "last_name": "Adhikari",
+          "instagram": "anubhav_adhikari",
+          "twitter": "mid2oceans"
+        },
+        {
+          "id": 5,
+          "first_name": "Robert",
+          "last_name": "Bourouphael",
+          "instagram": "aa",
+          "twitter": "ww"
+        },
+        {
+          "id": 5,
+          "first_name": "jj",
+          "last_name": "yy",
+          "instagram": "oo",
+          "twitter": "oo"
+        }
+      ]
+    },
+    "def": {
+      "roomName": "people squad",
+      "users": [
+        {
+          "id": 1,
+          "first_name": "Rudy",
+          "last_name": "Bourouphael",
+          "instagram": "mid2oceans",
+          "twitter": "mid2oceans"
+        },
+        {
+          "id": 2,
+          "first_name": "Neil",
+          "last_name": "Duran",
+          "instagram": "mariamduraa",
+          "twitter": "mid2oceans"
+        },
+        {
+          "id": 3,
+          "first_name": "Brendon",
+          "last_name": "Adhikari",
+          "instagram": "anubhav_adhikari",
+          "twitter": "mid2oceans"
+        }
+      ]
+    },
+    "ggg": {
+      "roomName": "Yolo Gang",
+      "users": [
+        {
+          "id": 5,
+          "first_name": "Robert",
+          "last_name": "ss",
+          "instagram": "aa",
+          "twitter": "ww"
+        }
+      ]
+    },
+    "susu123": {
+      "roomName": "gangggy",
+      "users": [
+        {
+          "id": 5,
+          "first_name": "susu",
+          "last_name": "ss",
+          "instagram": "ww",
+          "twitter": "ww"
+        }
+      ]
+    },
+    "hjhkjhukhhh": {
+      "roomName": "doulies",
+      "users": [
+        {
+          "id": 5,
+          "first_name": "Robert",
+          "last_name": "Bourouphael",
+          "instagram": "ww",
+          "twitter": "aa"
+        }
+      ]
+    },
+    "opop": {
+      "roomName": "googlers",
+      "users": []
+    }
+  }
+}
