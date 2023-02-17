@@ -38,13 +38,11 @@ const CreateRoom = () => {
 // change colors of roomID as necesarry 
     useEffect(() => {
         if (roomID.length == 0 ||  data[roomID]) {
-            console.log("cant create")
             setCanCreate(false)
             // TODO will need to move these Text functions to a different function to check if valid
             setPlaceholderText("placeholder notCorrect")
         }
         else {
-            console.log("can create")
             setCanCreate(true)
             setPlaceholderText("placeholder correct")
         }
@@ -85,7 +83,7 @@ const CreateRoom = () => {
                     <input id="roomName" className="input" type="text" placeholder=" " 
                     onChange={(r)=> setNewRoomName(r.target.value)} />
                     <div className="cut"></div>
-                    <label htmlFor="roomName" className={placeholderText}>Room Name</label>
+                    <label htmlFor="roomName" className='placeholder'>Room Name</label>
                 </div>
                 {!canCreate && <button type="text" className="submit" disabled >Create</button>}
                 {canCreate && <button type="text" className="submit" onClick={() => addMyRoom()} >Create</button>}
