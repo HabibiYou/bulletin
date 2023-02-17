@@ -34,6 +34,23 @@ const CreateRoom = () => {
 
     }, [])
 
+// check and make sure room exist
+// change colors of roomID as necesarry 
+    useEffect(() => {
+        if (roomID.length == 0 ||  data[roomID]) {
+            console.log("cant create")
+            setCanCreate(false)
+            // TODO will need to move these Text functions to a different function to check if valid
+            setPlaceholderText("placeholder notCorrect")
+        }
+        else {
+            console.log("can create")
+            setCanCreate(true)
+            setPlaceholderText("placeholder correct")
+        }
+
+    }, [roomID])
+
     //Create Room with same params as the JSON
     const createRoom = () => {
         data[roomID] = {roomName: `${newRoomName}`,users:[]}
@@ -60,7 +77,7 @@ const CreateRoom = () => {
                 <div className="subtitle"></div>
                 <div className="input-container ic1">
                     <input id="room" className="input" type="text" placeholder=" " 
-                    onChange={(r)=>doesRoomExist(data,r.target.value,setCanCreate,setRoomID,setPlaceholderText)} />
+                    onChange={(r)=>setRoomID(r.target.value)} />
                     <div className="cut"></div>
                     <label htmlFor="room" className={placeholderText}>Room ID</label>
                 </div>
@@ -78,24 +95,6 @@ const CreateRoom = () => {
 
         </div>
     );
-}
-
-// check and make sure room exist
-function doesRoomExist(data, roomID, setCanCreate, setRoomID, setPlaceholderText) {
-    setRoomID(roomID)
-    console.log(roomID)
-    if (data[roomID]) {
-        console.log("cant create")
-        setCanCreate(false)
-        // TODO will need to move these Text functions to a different function to check if valid
-        setPlaceholderText("placeholder notCorrect")
-    }
-    else {
-        console.log("can create")
-        setCanCreate(true)
-        setPlaceholderText("placeholder correct")
-    }
-    
 }
 
 export default CreateRoom;
