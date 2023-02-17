@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { IconButton  } from '@mui/material';
+import TipsAndUpdatesOutlinedIcon from '@mui/icons-material/TipsAndUpdatesOutlined';
+
 import './Home.css';
 
 const CreateRoom = () => {
@@ -34,15 +37,16 @@ const CreateRoom = () => {
 
     }, [])
 
-// check and make sure room exist
-// change colors of roomID as necesarry 
+    // check and make sure room exist and is valid
+    // change colors of roomID as necesarry 
     useEffect(() => {
-        if (roomID.length == 0 ||  data[roomID]) {
+        if (roomID.length < 6 || data[roomID]) {
             setCanCreate(false)
             // TODO will need to move these Text functions to a different function to check if valid
             setPlaceholderText("placeholder notCorrect")
         }
         else {
+            console.log(true)
             setCanCreate(true)
             setPlaceholderText("placeholder correct")
         }
@@ -51,8 +55,25 @@ const CreateRoom = () => {
 
     //Create Room with same params as the JSON
     const createRoom = () => {
-        data[roomID] = {roomName: `${newRoomName}`,users:[]}
-        
+        data[roomID] = { roomName: `${newRoomName}`, users: [] }
+
+    }
+
+
+    // function to generate an id for the room if user does not want to do it
+    const generateID = () => {
+        const validChars = 'abcdefghijklmnopqrstuvwxyz1234567890';
+        const charactersLength = validChars.length;
+        let newCode = '';
+
+        while (newCode == '' || data[{ newCode }]) {
+            newCode = '';
+            for (let i = 0; i < 7; i++) {
+                newCode += validChars.charAt(Math.floor(Math.random() * charactersLength));
+            }
+        }
+        setRoomID(newCode);
+
     }
 
     const addMyRoom = () => {
@@ -74,14 +95,19 @@ const CreateRoom = () => {
                 <div className="title">Create a room</div>
                 <div className="subtitle"></div>
                 <div className="input-container ic1">
-                    <input id="room" className="input" type="text" placeholder=" " 
-                    onChange={(r)=>setRoomID(r.target.value)} />
+                    <input id="room" className="input" type="text" placeholder=" " value={roomID}
+                        onChange={(r) => setRoomID(r.target.value)} />
                     <div className="cut"></div>
                     <label htmlFor="room" className={placeholderText}>Room ID</label>
                 </div>
+                <div className='center'>
+                    <IconButton color="primary" aria-label="generate room id" onClick={() => generateID()}>
+                        <TipsAndUpdatesOutlinedIcon />
+                    </IconButton>
+                </div>
                 <div className="input-container ic1">
-                    <input id="roomName" className="input" type="text" placeholder=" " 
-                    onChange={(r)=> setNewRoomName(r.target.value)} />
+                    <input id="roomName" className="input" type="text" placeholder=" "
+                        onChange={(r) => setNewRoomName(r.target.value)} />
                     <div className="cut"></div>
                     <label htmlFor="roomName" className='placeholder'>Room Name</label>
                 </div>

@@ -43,7 +43,7 @@ body {
 }
 
 .ic1 {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .ic2 {
@@ -141,6 +141,13 @@ body {
 .skip_button{
   text-transform: unset !important;
   font-size: 1px;
+  text-align: center;
+  color: #eee;
+
+}
+
+.generate_button{
+  text-transform: unset !important;
   text-align: center;
   color: #eee;
 
