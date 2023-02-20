@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { IconButton  } from '@mui/material';
+import { IconButton, FormControl, FormControlLabel, FormLabel, FormGroup, FormHelperText, Checkbox, Box } from '@mui/material';
 import TipsAndUpdatesOutlinedIcon from '@mui/icons-material/TipsAndUpdatesOutlined';
 
 import './Home.css';
@@ -8,6 +8,19 @@ import './Home.css';
 const CreateRoom = () => {
     const [roomID, setRoomID] = useState("")
     const [newRoomName, setNewRoomName] = useState("")
+
+    //Socials
+    const [socialstate, setSocialState] = useState({
+        instagram: false,
+        twitter: false,
+        tiktok: false,
+        snapchat: false,
+      });
+
+    const [maxSocialsError, setMaxSocialsError] = useState(false) 
+    const [minSocialsError, setMinSocialsError] = useState(true) 
+    
+    const {instagram, twitter, tiktok, snapchat} = socialstate
     const [canCreate, setCanCreate] = useState(false); // is true when valid inputs to create a room
 
     // initally the data will be null bc we haven't reached the server
@@ -16,7 +29,6 @@ const CreateRoom = () => {
     const [placeholderText, setPlaceholderText] = useState("placeholder text notCorrect")
 
     const navigate = useNavigate();
-
 
     //updates data
     const getRoomData = () => {
@@ -41,17 +53,54 @@ const CreateRoom = () => {
     // change colors of roomID as necesarry 
     useEffect(() => {
         if (roomID.length < 6 || data[roomID]) {
-            setCanCreate(false)
-            // TODO will need to move these Text functions to a different function to check if valid
             setPlaceholderText("placeholder notCorrect")
         }
         else {
-            console.log(true)
-            setCanCreate(true)
             setPlaceholderText("placeholder correct")
         }
 
     }, [roomID])
+
+    // check all params and make sure it is valid
+    useEffect(() => {
+        if (roomID.length < 6 || data[roomID] || minSocialsError == true || maxSocialsError==true) {
+            setCanCreate(false)
+        }
+        else {
+            setCanCreate(true)
+        }
+
+    }, [roomID, minSocialsError, maxSocialsError])
+
+
+    // check for checkbox validation 
+
+    const handleChecked = (event) => {
+        setSocialState({
+          ...socialstate,
+          [event.target.name]: event.target.checked,
+        });
+        console.log(socialstate)
+      };
+
+    useEffect(()=>{
+        const totalChecked = [instagram,twitter,tiktok,snapchat].filter((v) => v ).length
+        if( totalChecked == 0){
+            //Need atleast one
+            setMinSocialsError(true)
+            setMaxSocialsError(false)
+        }
+        else if (totalChecked > 3){
+            setMinSocialsError(false)
+            setMaxSocialsError(true)
+
+        }
+        else{
+            setMinSocialsError(false)
+            setMaxSocialsError(false)
+        }
+    },[socialstate])
+
 
     //Create Room with same params as the JSON
     const createRoom = () => {
@@ -111,10 +160,58 @@ const CreateRoom = () => {
                     <div className="cut"></div>
                     <label htmlFor="roomName" className='placeholder'>Room Name</label>
                 </div>
+            
+                <Box sx={{ display: 'flex' }}>
+                    <FormControl component="fieldset" variant="standard">
+                    <div className="subtitle">Social options</div>
+                        <FormGroup>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox name="instagram" checked = {instagram} onChange={handleChecked}/>
+                                }
+                                label="Instagram"
+                                className='form_item_text'
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox name="twitter"  checked = {twitter}  onChange={handleChecked}/>
+                                }
+                                label="Twitter"
+                                className='form_item_text'
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox name="tiktok" checked = {tiktok}  onChange={handleChecked}/>
+                                }
+                                label="TikTok"
+                                className='form_item_text'
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox name="snapchat"  checked = {snapchat}  onChange={handleChecked} />
+                                }
+                                label="Snapchat"
+                                className='form_item_text'
+                            />
+                        </FormGroup>
+                        {minSocialsError && 
+                        <FormHelperText className="form_helper_text_incorrect" >1 Choice Minimum!</FormHelperText>}
+                        {maxSocialsError &&
+                        <FormHelperText className="form_helper_text_incorrect">3 Choice Maximum</FormHelperText>
+                        }
+                    
+                        
+
+                    </FormControl>
+
+
+                </Box>
+
+                <br></br>
                 {!canCreate && <button type="text" className="submit" disabled >Create</button>}
                 {canCreate && <button type="text" className="submit" onClick={() => addMyRoom()} >Create</button>}
 
-                <br></br>
+
             </div>
 
         </div>

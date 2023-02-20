@@ -152,3 +152,19 @@ body {
   color: #eee;
 
 }
+/* Check Boxes  */
+.form_helper_text{
+  color: white !important;
+}
+
+.form_helper_text_incorrect {
+  color: #dc2f55 !important;
+}
+.form_helper_text_correct {
+  display: none I;
+}
+
+.form_item_text{
+  color: white !important;
+}
+
