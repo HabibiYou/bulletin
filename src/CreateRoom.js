@@ -10,22 +10,30 @@ const CreateRoom = () => {
     const [newRoomName, setNewRoomName] = useState("")
 
     //Socials
+
+    //Social list to see how many they checked
     const [socialstate, setSocialState] = useState({
         instagram: false,
         twitter: false,
         tiktok: false,
         snapchat: false,
-      });
+    });
 
-    const [maxSocialsError, setMaxSocialsError] = useState(false) 
-    const [minSocialsError, setMinSocialsError] = useState(true) 
-    
-    const {instagram, twitter, tiktok, snapchat} = socialstate
-    const [canCreate, setCanCreate] = useState(false); // is true when valid inputs to create a room
+
+    //states for social errors
+    const [maxSocialsError, setMaxSocialsError] = useState(false)
+    const [minSocialsError, setMinSocialsError] = useState(true)
+
+    //states for each social check
+    const { instagram, twitter, tiktok, snapchat } = socialstate
+
+    // is true when valid inputs to create a room
+    const [canCreate, setCanCreate] = useState(false);
 
     // initally the data will be null bc we haven't reached the server
     const [data, setData] = useState(null);
 
+    //this is for roomID error
     const [placeholderText, setPlaceholderText] = useState("placeholder text notCorrect")
 
     const navigate = useNavigate();
@@ -63,7 +71,7 @@ const CreateRoom = () => {
 
     // check all params and make sure it is valid
     useEffect(() => {
-        if (roomID.length < 6 || data[roomID] || minSocialsError == true || maxSocialsError==true) {
+        if (roomID.length < 6 || data[roomID] || minSocialsError == true || maxSocialsError == true) {
             setCanCreate(false)
         }
         else {
@@ -73,38 +81,39 @@ const CreateRoom = () => {
     }, [roomID, minSocialsError, maxSocialsError])
 
 
-    // check for checkbox validation 
 
-    const handleChecked = (event) => {
-        setSocialState({
-          ...socialstate,
-          [event.target.name]: event.target.checked,
-        });
-        console.log(socialstate)
-      };
-
-    useEffect(()=>{
-        const totalChecked = [instagram,twitter,tiktok,snapchat].filter((v) => v ).length
-        if( totalChecked == 0){
+    useEffect(() => {
+        const totalChecked = [instagram, twitter, tiktok, snapchat].filter((v) => v).length
+        if (totalChecked == 0) {
             //Need atleast one
             setMinSocialsError(true)
             setMaxSocialsError(false)
         }
-        else if (totalChecked > 3){
+        else if (totalChecked > 3) {
             setMinSocialsError(false)
             setMaxSocialsError(true)
 
         }
-        else{
+        else {
             setMinSocialsError(false)
             setMaxSocialsError(false)
         }
-    },[socialstate])
+    }, [socialstate])
+
+    // check for checkbox validation 
+
+    const handleChecked = (event) => {
+        setSocialState({
+            ...socialstate,
+            [event.target.name]: event.target.checked,
+        });
+        console.log(socialstate)
+    };
 
 
     //Create Room with same params as the JSON
     const createRoom = () => {
-        data[roomID] = { roomName: `${newRoomName}`, users: [] }
+        data[roomID] = { roomName: `${newRoomName}`, socials:{instagram:instagram,snapchat:snapchat, twitter:twitter, tiktok:tiktok }, users: [] }
 
     }
 
@@ -160,47 +169,48 @@ const CreateRoom = () => {
                     <div className="cut"></div>
                     <label htmlFor="roomName" className='placeholder'>Room Name</label>
                 </div>
-            
+                <br></br>
+
                 <Box sx={{ display: 'flex' }}>
                     <FormControl component="fieldset" variant="standard">
-                    <div className="subtitle">Social options</div>
+                        <div className="subtitle">Social options</div>
                         <FormGroup>
                             <FormControlLabel
                                 control={
-                                    <Checkbox name="instagram" checked = {instagram} onChange={handleChecked}/>
+                                    <Checkbox name="instagram" checked={instagram} onChange={handleChecked} />
                                 }
                                 label="Instagram"
                                 className='form_item_text'
                             />
                             <FormControlLabel
                                 control={
-                                    <Checkbox name="twitter"  checked = {twitter}  onChange={handleChecked}/>
+                                    <Checkbox name="twitter" checked={twitter} onChange={handleChecked} />
                                 }
                                 label="Twitter"
                                 className='form_item_text'
                             />
                             <FormControlLabel
                                 control={
-                                    <Checkbox name="tiktok" checked = {tiktok}  onChange={handleChecked}/>
+                                    <Checkbox name="tiktok" checked={tiktok} onChange={handleChecked} />
                                 }
                                 label="TikTok"
                                 className='form_item_text'
                             />
                             <FormControlLabel
                                 control={
-                                    <Checkbox name="snapchat"  checked = {snapchat}  onChange={handleChecked} />
+                                    <Checkbox name="snapchat" checked={snapchat} onChange={handleChecked} />
                                 }
                                 label="Snapchat"
                                 className='form_item_text'
                             />
                         </FormGroup>
-                        {minSocialsError && 
-                        <FormHelperText className="form_helper_text_incorrect" >1 Choice Minimum!</FormHelperText>}
+                        {minSocialsError &&
+                            <FormHelperText className="form_helper_text_incorrect" >1 Choice Minimum!</FormHelperText>}
                         {maxSocialsError &&
-                        <FormHelperText className="form_helper_text_incorrect">3 Choice Maximum</FormHelperText>
+                            <FormHelperText className="form_helper_text_incorrect">3 Choice Maximum</FormHelperText>
                         }
-                    
-                        
+
+
 
                     </FormControl>
 

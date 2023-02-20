@@ -22,6 +22,7 @@ const Room = () => {
     const [roomName, setRoomName] = useState(""); // the room name from the json
     const [copied, setCopied] = useState(false); // used to bring up the snackbar that says "u copied a link"
     const [users, setUsers] = useState(null); // the list of users  
+    const [socialMedias, setSocialMedias] = useState([])
 
     const navigate = useNavigate();
 
@@ -37,6 +38,7 @@ const Room = () => {
                 if (data.hasOwnProperty(roomID)) { // if the room exists then set the vars to be correct
                     setRoomName(data[roomID].roomName)
                     setUsers(data[roomID].users)
+                    setSocialMedias(data[roomID].socials)
                 }
                 else { // if the room does not exist then navigate to the /room-not-found link
                     navigate(`/room-not-found`)
@@ -71,7 +73,7 @@ const Room = () => {
             {/* If the users exist and there is atleast one person,
              generate the users with the UserList component */}
             {users && users.length > 0 &&
-                <UserList users={users} />}
+                <UserList users={users} socialMedias = {socialMedias}/>}
 
             {/* If the users exist and there is no one,
              show the no one "no one is here yet" screen. */}
