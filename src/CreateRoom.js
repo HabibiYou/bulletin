@@ -142,6 +142,7 @@ const CreateRoom = () => {
         //create
         const r = createRoom() 
         set(ref(db,`${roomID}`),r)
+        navigate(`/room/${roomID}`)
     }
 
     return (
