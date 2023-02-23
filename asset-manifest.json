@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/http//mid2oceans.github.io/bulletin/static/css/main.6b2a9784.css",
+    "main.js": "/http//mid2oceans.github.io/bulletin/static/js/main.e48bf69e.js",
+    "static/js/787.525db4bd.chunk.js": "/http//mid2oceans.github.io/bulletin/static/js/787.525db4bd.chunk.js",
+    "static/media/tiktok_icon.webp": "/http//mid2oceans.github.io/bulletin/static/media/tiktok_icon.88524dffa02f1efed1d6.webp",
+    "index.html": "/http//mid2oceans.github.io/bulletin/index.html",
+    "main.6b2a9784.css.map": "/http//mid2oceans.github.io/bulletin/static/css/main.6b2a9784.css.map",
+    "main.e48bf69e.js.map": "/http//mid2oceans.github.io/bulletin/static/js/main.e48bf69e.js.map",
+    "787.525db4bd.chunk.js.map": "/http//mid2oceans.github.io/bulletin/static/js/787.525db4bd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6b2a9784.css",
+    "static/js/main.e48bf69e.js"
+  ]
+}
