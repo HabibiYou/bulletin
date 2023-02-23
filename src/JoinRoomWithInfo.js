@@ -35,9 +35,16 @@ const JoinRoomWithInfo = () => {
         onValue(ref(db), (snapshot)=>{
             const snapshotData = snapshot.val();
             if(snapshotData!==null){
-                setData(snapshotData)
+                if (snapshotData.hasOwnProperty(roomID)) {
+                    setData(snapshotData)
+                    setSocialMedias(snapshotData[roomID].socials)
+                }
+                else{
+                    navigate(`/room-not-found`)
+                }
+                console.log(snapshotData)
+                
                 setSocialMedias(snapshotData[roomID].socials)
-
             }
 
         });
@@ -51,7 +58,6 @@ const JoinRoomWithInfo = () => {
 
     //only show the social media inputs we need
     useEffect(() => {
-        console.log(socialMedias)
         //get all the true
         if (socialMedias.instagram == true) {
             setInstagram(true)
@@ -82,7 +88,7 @@ const JoinRoomWithInfo = () => {
         // add ourselves to the list
         if (allParamsFilled()) {
             const newUser = createUser();
-            const currentRoomData = ref(db, `${roomID}`);
+            const currentRoomData = ref(db, `${roomID}/users`);
             const newRoomData = push(currentRoomData);
             set(newRoomData,newUser);
             navigate(`/room/${roomID}`)
@@ -93,7 +99,6 @@ const JoinRoomWithInfo = () => {
     //check to make sure inputs are valid
     function allParamsFilled() {
         if (name.length > 0) {
-            console.log(true)
             return true
         }
         else { return false }

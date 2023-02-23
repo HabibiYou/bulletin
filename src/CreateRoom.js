@@ -41,6 +41,7 @@ const CreateRoom = () => {
 
     const navigate = useNavigate();
 
+
     //updates data
     const getRoomData = () => {
         onValue(ref(db), (snapshot)=>{
@@ -63,7 +64,7 @@ const CreateRoom = () => {
     // check and make sure room exist and is valid
     // change colors of roomID as necesarry 
     useEffect(() => {
-        if (roomID.length < 6 || data[roomID]) {
+        if (roomID.length < 6 || (data && data[roomID])) {
             setPlaceholderText("placeholder notCorrect")
         }
         else {
@@ -75,7 +76,7 @@ const CreateRoom = () => {
 
     // check all params and make sure it is valid
     useEffect(() => {
-        if (roomID.length < 6 || data[roomID] || minSocialsError == true || maxSocialsError == true) {
+        if (roomID.length < 6 || (data && data[roomID]) || minSocialsError == true || maxSocialsError == true) {
             setCanCreate(false)
         }
         else {
@@ -128,7 +129,7 @@ const CreateRoom = () => {
         const charactersLength = validChars.length;
         let newCode = '';
 
-        while (newCode == '' || data[{ newCode }]) {
+        while (newCode == '' || (data && data.hasOwnProperty(newCode))) {
             newCode = '';
             for (let i = 0; i < 7; i++) {
                 newCode += validChars.charAt(Math.floor(Math.random() * charactersLength));

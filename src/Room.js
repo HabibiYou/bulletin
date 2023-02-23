@@ -9,6 +9,11 @@ import Button from '@mui/material/IconButton';
 import Snackbar from '@mui/material/Snackbar';
 import UserList from './modules/UserList'
 
+import { db } from "./firebase/firebase"
+import { onValue, ref, push, set } from "firebase/database";
+
+
+
 /*
 Component for /room/roomID
 
@@ -26,24 +31,30 @@ const Room = () => {
 
     const navigate = useNavigate();
 
+
+    const getRoomData = () => {
+        onValue(ref(db), (snapshot) => {
+            const snapshotData = snapshot.val();
+            const data = snapshotData[roomID]
+            if (data) {
+                if (data.hasOwnProperty("users")) {
+                    setUsers(data.users)
+                }
+                setSocialMedias(data.socials)
+                setRoomName(data.roomName)
+            }
+            else {
+                navigate(`/room-not-found`)
+
+            }
+
+        });
+    }
+
     //This happens once in the beggining, because it happens 
     // after every dependency in the list changes, the list is empty as u see on line ~44
     useEffect(() => {
-        //fetch from this link ...
-        fetch('http://localhost:8000/Rooms')
-            .then(res => {
-                return res.json(); // ..return the result as a json 
-            })
-            .then((data) => { // .. takes the return as (data) from 2 lines up and 
-                if (data.hasOwnProperty(roomID)) { // if the room exists then set the vars to be correct
-                    setRoomName(data[roomID].roomName)
-                    setUsers(data[roomID].users)
-                    setSocialMedias(data[roomID].socials)
-                }
-                else { // if the room does not exist then navigate to the /room-not-found link
-                    navigate(`/room-not-found`)
-                }
-            })
+        getRoomData()
 
     }, []);
 
@@ -72,12 +83,12 @@ const Room = () => {
 
             {/* If the users exist and there is atleast one person,
              generate the users with the UserList component */}
-            {users && users.length > 0 &&
-                <UserList users={users} socialMedias = {socialMedias}/>}
+            {users && Object.keys(users).length > 0 &&
+                <UserList users={users} socialMedias={socialMedias} />}
 
             {/* If the users exist and there is no one,
              show the no one "no one is here yet" screen. */}
-            {users && users.length === 0 &&
+            {!users &&
                 <div className='listItem'>
                     <div className='center'>
                         <h2 >Nobody is here...</h2>

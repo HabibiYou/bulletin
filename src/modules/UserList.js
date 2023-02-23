@@ -1,5 +1,3 @@
-import UserItem from "./UserItem";
-import ListGroup from 'react-bootstrap/ListGroup';
 import instagram_icon from './res/instagram_icon.png'
 import twitter_icon from './res/twitter_icon.png'
 import snapchat_icon from './res/snapchat_icon.png'
@@ -19,6 +17,7 @@ import { useEffect, useState } from "react";
 
 
 const UserList = ({ users, socialMedias }) => {
+    console.log(Object.keys(users).length)
 
     // used to determine what socials to show
     const [instagramStatus,setInstagramStatus] = useState(false)
@@ -26,12 +25,7 @@ const UserList = ({ users, socialMedias }) => {
     const [tiktokStatus,setTiktokStatus] = useState(false)
     const [snapchatStatus,setSnapchatStatus] = useState(false)
 
-    
-
-    
-
     useEffect(()=>{
-        console.log(socialMedias)
         //get all the true
         if(socialMedias.instagram == true){
             setInstagramStatus(true)
@@ -57,8 +51,9 @@ const UserList = ({ users, socialMedias }) => {
             <div>
                 <List>
 
-                    {users.map((user, i) => (
-                        <div key={i}>
+                    {Object.entries(users).map(([id,user]) => (
+                        
+                        <div key={id}>
                             <ListItem className="listItem">
                                 <ListItemText
                                     primary={user.name}
@@ -100,6 +95,7 @@ const UserList = ({ users, socialMedias }) => {
 
 function makeIGLink(ig) {
     return `https://www.instagram.com/${ig}/`
+    // return `instagram://user?username=${ig}/`
 
 }
 
