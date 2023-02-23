@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import { IconButton, FormControl, FormControlLabel, FormLabel, FormGroup, FormHelperText, Checkbox, Box } from '@mui/material';
 import TipsAndUpdatesOutlinedIcon from '@mui/icons-material/TipsAndUpdatesOutlined';
 
+import {db} from "./firebase/firebase"
+import {set,ref, onValue} from "firebase/database"
+
 import './Home.css';
 
 const CreateRoom = () => {
@@ -38,16 +41,17 @@ const CreateRoom = () => {
 
     const navigate = useNavigate();
 
+
     //updates data
     const getRoomData = () => {
-        // get all the data
-        fetch('http://localhost:8000/Rooms')
-            .then(res => {
-                return res.json();
-            })
-            .then((d) => {
-                setData(d)
-            })
+        onValue(ref(db), (snapshot)=>{
+            const snapshotData = snapshot.val();
+            if(snapshotData!==null){
+                setData(snapshotData)
+
+            }
+
+        });
     }
 
     //GET ROOM DATA AS SOON AS WE INIT
@@ -60,18 +64,19 @@ const CreateRoom = () => {
     // check and make sure room exist and is valid
     // change colors of roomID as necesarry 
     useEffect(() => {
-        if (roomID.length < 6 || data[roomID]) {
+        if (roomID.length < 6 || (data && data[roomID])) {
             setPlaceholderText("placeholder notCorrect")
         }
         else {
             setPlaceholderText("placeholder correct")
         }
+        console.log(data)
 
     }, [roomID])
 
     // check all params and make sure it is valid
     useEffect(() => {
-        if (roomID.length < 6 || data[roomID] || minSocialsError == true || maxSocialsError == true) {
+        if (roomID.length < 6 || (data && data[roomID]) || minSocialsError == true || maxSocialsError == true) {
             setCanCreate(false)
         }
         else {
@@ -113,8 +118,8 @@ const CreateRoom = () => {
 
     //Create Room with same params as the JSON
     const createRoom = () => {
-        data[roomID] = { roomName: `${newRoomName}`, socials:{instagram:instagram,snapchat:snapchat, twitter:twitter, tiktok:tiktok }, users: [] }
-
+        // data[roomID] = { roomName: `${newRoomName}`, socials:{instagram:instagram,snapchat:snapchat, twitter:twitter, tiktok:tiktok }, users: [] }
+            return { roomName: `${newRoomName}`, socials:{instagram:instagram,snapchat:snapchat, twitter:twitter, tiktok:tiktok }, users: [] }
     }
 
 
@@ -124,7 +129,7 @@ const CreateRoom = () => {
         const charactersLength = validChars.length;
         let newCode = '';
 
-        while (newCode == '' || data[{ newCode }]) {
+        while (newCode == '' || (data && data.hasOwnProperty(newCode))) {
             newCode = '';
             for (let i = 0; i < 7; i++) {
                 newCode += validChars.charAt(Math.floor(Math.random() * charactersLength));
@@ -135,16 +140,10 @@ const CreateRoom = () => {
     }
 
     const addMyRoom = () => {
-        createRoom() // since this edits our const data we can just use that in the POST req
-        fetch('http://localhost:8000/Rooms', {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        }).then(() => {
-            console.log("added")
-            navigate(`/room/${roomID}`)
-        })
-
+        //create
+        const r = createRoom() 
+        set(ref(db,`${roomID}`),r)
+        navigate(`/room/${roomID}`)
     }
 
     return (

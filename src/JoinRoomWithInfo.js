@@ -3,6 +3,10 @@ import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button';
 
+import {db} from "./firebase/firebase"
+
+import { onValue, ref, push, set } from "firebase/database";
+
 
 import './Home.css';
 
@@ -28,15 +32,22 @@ const JoinRoomWithInfo = () => {
 
     //updates data
     const getRoomData = () => {
-        // get all the data
-        fetch('http://localhost:8000/Rooms')
-            .then(res => {
-                return res.json();
-            })
-            .then((d) => {
-                setData(d)
-                setSocialMedias(d[roomID].socials)
-            })
+        onValue(ref(db), (snapshot)=>{
+            const snapshotData = snapshot.val();
+            if(snapshotData!==null){
+                if (snapshotData.hasOwnProperty(roomID)) {
+                    setData(snapshotData)
+                    setSocialMedias(snapshotData[roomID].socials)
+                }
+                else{
+                    navigate(`/room-not-found`)
+                }
+                console.log(snapshotData)
+                
+                setSocialMedias(snapshotData[roomID].socials)
+            }
+
+        });
     }
 
     //GET ROOM DATA AS SOON AS WE INIT
@@ -47,7 +58,6 @@ const JoinRoomWithInfo = () => {
 
     //only show the social media inputs we need
     useEffect(() => {
-        console.log(socialMedias)
         //get all the true
         if (socialMedias.instagram == true) {
             setInstagram(true)
@@ -78,16 +88,10 @@ const JoinRoomWithInfo = () => {
         // add ourselves to the list
         if (allParamsFilled()) {
             const newUser = createUser();
-            data[roomID].users.push(newUser)
-            fetch('http://localhost:8000/Rooms', {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            }).then(() => {
-                console.log("added with ", data)
-                //TODO fix optimization
-                navigate(`/room/${roomID}`)
-            })
+            const currentRoomData = ref(db, `${roomID}/users`);
+            const newRoomData = push(currentRoomData);
+            set(newRoomData,newUser);
+            navigate(`/room/${roomID}`)
         }
 
     }
@@ -95,7 +99,6 @@ const JoinRoomWithInfo = () => {
     //check to make sure inputs are valid
     function allParamsFilled() {
         if (name.length > 0) {
-            console.log(true)
             return true
         }
         else { return false }
