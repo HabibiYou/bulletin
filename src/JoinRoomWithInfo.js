@@ -115,22 +115,22 @@ const JoinRoomWithInfo = () => {
                     <div className="cut"></div>
                     <label htmlFor="name" className="placeholder">Name</label>
                 </div>
-                {instagram && <div className="input-container ic2">
+                {socialMedias.instagram && <div className="input-container ic2">
                     <input id="instagram" className="input" type="text" placeholder=" " onChange={(i) => setInstagram(i.target.value)} />
                     <div className="cut cut-short"></div>
                     <label htmlFor="instagram" className="placeholder">Instagram</label>
                 </div>}
-                {twitter && <div className="input-container ic2">
+                {socialMedias.twitter && <div className="input-container ic2">
                     <input id="twitter" className="input" type="text" placeholder=" " onChange={(i) => setTwitter(i.target.value)} />
                     <div className="cut cut-short"></div>
                     <label htmlFor="twitter" className="placeholder">Twitter</label>
                 </div>}
-                {snapchat && <div className="input-container ic2">
+                {socialMedias.snapchat && <div className="input-container ic2">
                     <input id="snapchat" className="input" type="text" placeholder=" " onChange={(i) => setSnapchat(i.target.value)} />
                     <div className="cut cut-short"></div>
                     <label htmlFor="snapchat" className="placeholder">Snapchat</label>
                 </div>}
-                {tiktok && <div className="input-container ic2">
+                {socialMedias.tiktok && <div className="input-container ic2">
                     <input id="tiktok" className="input" type="text" placeholder=" " onChange={(i) => setTiktok(i.target.value)} />
                     <div className="cut cut-short"></div>
                     <label htmlFor="tiktok" className="placeholder">Tiktok</label>
