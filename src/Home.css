@@ -51,7 +51,7 @@ body {
 .title-main {
   color:var(--main_text_color);
   font-family: "alba";
-  font-size: 50px;
+  font-size: 48px;
   text-align: center;
   font-weight: 600;
   margin-top: 30px;
@@ -184,7 +184,7 @@ body {
 }
 
 .submit:disabled {
-  background-color: var(--button_background);
+  background-color: var(--main_background);
 }
 .center{
   text-align: center;
@@ -193,6 +193,7 @@ body {
   text-transform: unset !important;
   font-size: 1px;
   text-align: center;
+  font-family: "alba" !important;
   color: var(--main_text_color) !important;
 
 }

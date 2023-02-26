@@ -91,7 +91,8 @@ const JoinRoomWithInfo = () => {
 
     //check to make sure inputs are valid
     function allParamsFilled() {
-        if (name.length > 0) {
+
+        if (name.length > 0 && (twitter.length > 3 || instagram.length > 3 || snapchat.length > 3 || tiktok.length > 3)) {
             return true
         }
         else { return false }

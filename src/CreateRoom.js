@@ -70,8 +70,6 @@ const CreateRoom = () => {
         else {
             setPlaceholderText("placeholder correct")
         }
-        console.log(data)
-
     }, [roomID])
 
     // check all params and make sure it is valid
@@ -112,7 +110,6 @@ const CreateRoom = () => {
             ...socialstate,
             [event.target.name]: event.target.checked,
         });
-        console.log(socialstate)
     };
 
 
@@ -142,7 +139,7 @@ const CreateRoom = () => {
     const addMyRoom = () => {
         //create
         const r = createRoom() 
-        set(ref(db,`${roomID}`),r)
+        set(ref(db,`${roomID.toLowerCase()}`),r)
         navigate(`/room/${roomID}`)
     }
 

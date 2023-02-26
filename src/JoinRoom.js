@@ -25,7 +25,7 @@ const JoinRoom = () => {
             //If there is no data means there are no rooms at all
             if (snapshotData !== null) {
                 //if it has the roomID set the data as the data in roomID
-                if (snapshotData.hasOwnProperty(roomID)) {
+                if (snapshotData.hasOwnProperty(roomID.toLowerCase())) {
                     setCanJoin(true);
                     setPlaceholderText("placeholder correct"); // This turns text green
 
@@ -57,7 +57,7 @@ const JoinRoom = () => {
                     note: r.target.value just is the value of the string inside the input at the moment.
                     So basically everytime they type a new letter it will call this and update the roomID
                     */}
-                    <input id="room" className="input" type="text" onChange={r => setRoomID(r.target.value)} placeholder=" " />
+                    <input id="room" className="input" type="text" onChange={r => setRoomID(r.target.value.toLowerCase())} placeholder=" "  pattern="[a-zA-Z0-9]+"/>
                     <div className="cut cut-long"></div>
                     <label htmlFor="room" className={placeholderText}>Room code</label>
                 </div>

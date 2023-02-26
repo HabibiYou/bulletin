@@ -9,8 +9,8 @@ const Home = () => {
         <div className='body'>
             <div className="form">
                 <div className="title-main">What's your social?</div>
-                <button type="text" className="submit text" onClick={() => navigate(`/join`)}>Join</button>
-                <button type="text" className="submit text" onClick={() => navigate(`/create`)}>Create a room</button>
+                <button type="text" className="submit" onClick={() => navigate(`/join`)}>Join</button>
+                <button type="text" className="submit" onClick={() => navigate(`/create`)}>Create a room</button>
                 <br></br>
             </div>
         </div>
