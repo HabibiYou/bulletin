@@ -1,6 +1,6 @@
 import instagram_icon from './res/instagram_icon.png'
 import twitter_icon from './res/twitter_icon.png'
-import snapchat_icon from './res/snapchat_icon.png'
+import snapchat_icon from './res/snapchat-logo.svg'
 import tiktok_icon from './res/tiktok_icon.webp'
 
 
@@ -56,6 +56,7 @@ const UserList = ({ users, socialMedias }) => {
                         <div key={id}>
                             <ListItem className="listItem">
                                 <ListItemText
+                                    className='listItem-text'
                                     primary={user.name}
                                     secondary=''
                                 />
@@ -71,7 +72,7 @@ const UserList = ({ users, socialMedias }) => {
                                 </ListItemAvatar>}
                                 {snapchatStatus && user.snapchat.length > 0 &&<ListItemAvatar>
                                     <a href={makeSnapchatLink(user.snapchat)}>
-                                        <Avatar className="icon" src={snapchat_icon}></Avatar>
+                                        <Avatar className="icon-small" src={snapchat_icon}></Avatar>
                                     </a>
                                 </ListItemAvatar>}
                                 {tiktokStatus && user.tiktok.length > 0 &&<ListItemAvatar>

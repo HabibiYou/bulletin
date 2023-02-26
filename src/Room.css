@@ -1,5 +1,17 @@
+:root {
+  --form_background: #DF0E55;
+  --white_background: #fbfafa;
+  --button_background: #0BAF77;
+  --main_background: #AF0B43;
+  --listitem_background:#ffffff;
+}
+
 .icon{
-    scale: .9;    
+    scale: 1;    
+}
+
+.icon-small{
+  scale: 1.5;
 }
 
 .copy_icon{
@@ -12,7 +24,7 @@
 }
 
 .main_background {
-    background-color: #15172b;
+    background-color: var(--form_background);
     border-radius: 20px;
     box-sizing: border-box;
     height: fit-content;
@@ -23,11 +35,16 @@
   }
 
   .listItem{
-    background-color: #8c95f3;
-    border: 5px solid black;
+    background-color: var(--white_background);
+    border: 5px solid var(--main_background);
     border-radius: 20px;
     margin-top: 10px;
     align-items: center;
+  }
+
+  .listItem-text {
+    font-weight: bold;
+    color: var(--main_background);
   }
 
   .center{
@@ -39,7 +56,7 @@
   }
 
   .add_me_button{
-    background-color: #08d;
+    background-color: var(--button_background);
     border-radius: 12px;
     border: 0;
     box-sizing: border-box;

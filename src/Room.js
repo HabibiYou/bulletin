@@ -10,7 +10,7 @@ import Snackbar from '@mui/material/Snackbar';
 import UserList from './modules/UserList'
 
 import { db } from "./firebase/firebase"
-import { onValue, ref, push, set } from "firebase/database";
+import { onValue, ref } from "firebase/database";
 
 
 
@@ -21,6 +21,8 @@ Component for /room/roomID
 */
 
 const Room = () => {
+
+    const urlLink = "https://whatsyoursocial-bc1f4.web.app/"
 
     const { roomID } = useParams() // gets the roomID from the URL ex: ...com/room/01932 roomID is 01932
 
@@ -62,7 +64,7 @@ const Room = () => {
     const copy = async () => {
         console.log("copied")
         setCopied(true);
-        await navigator.clipboard.writeText(roomID);
+        await navigator.clipboard.writeText(urlLink+`/room/${roomID}/join`);
     }
 
     return (

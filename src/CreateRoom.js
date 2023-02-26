@@ -37,7 +37,7 @@ const CreateRoom = () => {
     const [data, setData] = useState(null);
 
     //this is for roomID error
-    const [placeholderText, setPlaceholderText] = useState("placeholder text notCorrect")
+    const [placeholderText, setPlaceholderText] = useState("placeholder text idle")
 
     const navigate = useNavigate();
 
@@ -65,7 +65,7 @@ const CreateRoom = () => {
     // change colors of roomID as necesarry 
     useEffect(() => {
         if (roomID.length < 6 || (data && data[roomID])) {
-            setPlaceholderText("placeholder notCorrect")
+            setPlaceholderText("placeholder idle")
         }
         else {
             setPlaceholderText("placeholder correct")
@@ -154,19 +154,19 @@ const CreateRoom = () => {
                 <div className="input-container ic1">
                     <input id="room" className="input" type="text" placeholder=" " value={roomID}
                         onChange={(r) => setRoomID(r.target.value)} />
-                    <div className="cut"></div>
+                    <div className="cut cut-mid"></div>
                     <label htmlFor="room" className={placeholderText}>Room ID</label>
                 </div>
                 <div className='center'>
-                    <IconButton color="primary" aria-label="generate room id" onClick={() => generateID()}>
+                    <IconButton color="primary" aria-label="generate room id" onClick={() => generateID()} className='iconButton'>
                         <TipsAndUpdatesOutlinedIcon />
                     </IconButton>
                 </div>
                 <div className="input-container ic1">
                     <input id="roomName" className="input" type="text" placeholder=" "
                         onChange={(r) => setNewRoomName(r.target.value)} />
-                    <div className="cut"></div>
-                    <label htmlFor="roomName" className='placeholder'>Room Name</label>
+                    <div className="cut cut-long"></div>
+                    <label htmlFor="roomName" className='placeholder idle'>Room Name</label>
                 </div>
                 <br></br>
 
@@ -176,28 +176,28 @@ const CreateRoom = () => {
                         <FormGroup>
                             <FormControlLabel
                                 control={
-                                    <Checkbox name="instagram" checked={instagram} onChange={handleChecked} />
+                                    <Checkbox name="instagram" checked={instagram} onChange={handleChecked} className="checkbox"/>
                                 }
                                 label="Instagram"
                                 className='form_item_text'
                             />
                             <FormControlLabel
                                 control={
-                                    <Checkbox name="twitter" checked={twitter} onChange={handleChecked} />
+                                    <Checkbox name="twitter" checked={twitter} onChange={handleChecked} className="checkbox"/>
                                 }
                                 label="Twitter"
                                 className='form_item_text'
                             />
                             <FormControlLabel
                                 control={
-                                    <Checkbox name="tiktok" checked={tiktok} onChange={handleChecked} />
+                                    <Checkbox name="tiktok" checked={tiktok} onChange={handleChecked} className="checkbox" />
                                 }
                                 label="TikTok"
                                 className='form_item_text'
                             />
                             <FormControlLabel
                                 control={
-                                    <Checkbox name="snapchat" checked={snapchat} onChange={handleChecked} />
+                                    <Checkbox name="snapchat" checked={snapchat} onChange={handleChecked} className="checkbox" />
                                 }
                                 label="Snapchat"
                                 className='form_item_text'

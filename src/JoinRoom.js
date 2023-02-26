@@ -9,7 +9,7 @@ const JoinRoom = () => {
 
     const [canJoin, setCanJoin] = useState(false); // are all the inputs valid for us to let them join
 
-    const [placeholderText, setPlaceholderText] = useState("placeholder text notCorrect") // used to turn text from green to red
+    const [placeholderText, setPlaceholderText] = useState("placeholder idle") // used to turn text from green to red
 
     const [roomID, setRoomID] = useState("") // the room id we will use
 
@@ -32,7 +32,7 @@ const JoinRoom = () => {
                 }
                 else {
                     setCanJoin(false);
-                    setPlaceholderText("placeholder notCorrect"); // this turns text red
+                    setPlaceholderText("placeholder idle"); // this turns text red
                 }
             }
         });
@@ -58,7 +58,7 @@ const JoinRoom = () => {
                     So basically everytime they type a new letter it will call this and update the roomID
                     */}
                     <input id="room" className="input" type="text" onChange={r => setRoomID(r.target.value)} placeholder=" " />
-                    <div className="cut cut-short"></div>
+                    <div className="cut cut-long"></div>
                     <label htmlFor="room" className={placeholderText}>Room code</label>
                 </div>
                 {/* Disable Join Button unless they type in a good Room number */}

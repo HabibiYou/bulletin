@@ -1,3 +1,19 @@
+@font-face {
+  font-family: "alba";
+  src: local("GoldmanBold"),
+   url("./fonts/ALBA____.TTF") format("truetype");
+   
+  }
+
+:root {
+  --form_background: #af0b43;
+  --list_item_background: #fbfafa;
+  --button_background: #0BAF77;
+  --main_background: #ff7f7f;
+  --main_text_color: #eee;
+  --input_text_color: #af0b43;
+}
+
 .App {
   text-align: center;
 }
@@ -5,33 +21,35 @@
 
 body {
   align-items: center;
-  background-color: #000;
+  background-color: var(--main_background);
   display: flex;
   justify-content: center;
   min-height: 100vh;
 }
 
 .form {
-  background-color: #15172b;
+  background-color: var(--form_background);
   border-radius: 20px;
   box-sizing: border-box;
   height: fit-content;
   min-height: 50%;
-  padding: 20px;
   min-width: 320px;
   width: 70%;
+  padding: 20px;
+
 }
 
 .title {
-  color: #eee;
-  font-family: sans-serif;
+  color:var(--main_text_color);
+  font-family: "alba";
   font-size: 36px;
   font-weight: 600;
   margin-top: 30px;
+  letter-spacing: 1px !important;
 }
 
 .subtitle {
-  color: #eee;
+  color: var(--main_text_color);
   font-family: sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -53,11 +71,11 @@ body {
 }
 
 .input {
-  background-color: #303245;
+  background-color: var(--list_item_background);
   border-radius: 12px;
   border: 0;
   box-sizing: border-box;
-  color: #eee;
+  color: var(--input_text_color);
   font-size: 18px;
   height: 100%;
   outline: 0;
@@ -66,7 +84,7 @@ body {
 }
 
 .cut {
-  background-color: #15172b;
+  background-color: var(--form_background);
   border-radius: 10px;
   height: 20px;
   left: 20px;
@@ -78,7 +96,15 @@ body {
 }
 
 .cut-short {
-  width: 100px;
+  width: 60px;
+}
+
+.cut-mid {
+  width: 75px;
+}
+
+.cut-long {
+  width: 90px;
 }
 
 .input:focus ~ .cut,
@@ -87,7 +113,7 @@ body {
 }
 
 .placeholder {
-  color: #65657b;
+  color: var(--input_text_color);
   font-family: sans-serif;
   left: 20px;
   line-height: 14px;
@@ -104,11 +130,11 @@ body {
 }
 
 .input:not(:placeholder-shown) ~ .placeholder {
-  color: #808097;
+  color: var(--main_text_color);
 }
 
-.input:focus ~ .notCorrect {
-  color: #dc2f55;
+.input:focus ~ .idle {
+  color: var(--main_text_color);
 }
 
 .input:focus ~ .correct {
@@ -116,11 +142,11 @@ body {
 }
 
 .submit {
-  background-color: #08d;
+  background-color: var(--button_background);
   border-radius: 12px;
   border: 0;
   box-sizing: border-box;
-  color: #eee;
+  color: var(--main_text_color);
   cursor: pointer;
   font-size: 18px;
   height: 50px;
@@ -131,11 +157,11 @@ body {
 }
 
 .submit:active {
-  background-color: #06b;
+  background-color: var(--button_background);
 }
 
 .submit:disabled {
-  background-color: rgb(5, 70, 122);
+  background-color: var(--button_background);
 }
 .center{
   text-align: center;
@@ -144,29 +170,37 @@ body {
   text-transform: unset !important;
   font-size: 1px;
   text-align: center;
-  color: #eee;
+  color: var(--main_text_color) !important;
 
 }
 
 .generate_button{
   text-transform: unset !important;
   text-align: center;
-  color: #eee;
+  color: var(--main_text_color);
 
 }
 /* Check Boxes  */
+/* Override MUI */
+.checkbox > .MuiSvgIcon-root{
+  color:var(--list_item_background)
+  }
+
+.iconButton > .MuiSvgIcon-root{
+  fill:var(--list_item_background);
+  align-items: center;}
 .form_helper_text{
-  color: white !important;
+  color:var(--main_text_color) !important;
 }
 
 .form_helper_text_incorrect {
-  color: #dc2f55 !important;
+  color: var(--main_text_color) !important;
 }
 .form_helper_text_correct {
   display: none I;
 }
 
 .form_item_text{
-  color: white !important;
+  color: var(--main_text_color) !important;
 }
 
