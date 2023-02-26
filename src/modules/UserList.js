@@ -47,7 +47,7 @@ const UserList = ({ users, socialMedias }) => {
     // TODO make it so you need one thing in order to show ur tile
     return (
         <div>
-                <div className="title-secondary">People</div>
+                {/* <div className="title-secondary">People</div> */}
             <div>
                 <List>
 

@@ -17,6 +17,19 @@
   text-align: center;
 }
 
+.share-button-text{
+  color: var(--main_text_color);
+  text-align: center;
+  font-family: "alba";
+  width: 100%;
+  padding: 3%;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+  background-color: #af0b43;
+  border-radius: 20px;
+}
+
 .copy_icon{
   scale: .6;
   padding-left: 5px;

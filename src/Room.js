@@ -75,11 +75,11 @@ const Room = () => {
                 <br></br>
                 {roomName}
             </div>
-            <div className='center'>
+            <div className='share-button'>
                 <Button size='small' onClick={() => copy()}>
-                    <div className="subtitle">
+                    <div className="share-button-text">
                         Room ID: {roomID}
-                        <ContentCopyIcon className='copy_icon' />
+                        {/* <ContentCopyIcon className='copy_icon' /> */}
                     </div>
                 </Button>
             </div>
