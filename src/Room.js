@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import './Room.css';
 import avatar from './modules/res/smile_face_icon.png'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import Button from '@mui/material/IconButton';
-import Snackbar from '@mui/material/Snackbar';
+import { Button, Snackbar, IconButton } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import UserList from './modules/UserList'
 
 import { db } from "./firebase/firebase"
@@ -69,6 +69,9 @@ const Room = () => {
 
     return (
         <div className='main_background'>
+            <IconButton onClick={() => { navigate(`/`) }}>
+                <ArrowBackIcon className='back-button' />
+            </IconButton>
 
             <div className="title">
                 Welcome
@@ -92,10 +95,10 @@ const Room = () => {
             {/* If the users exist and there is no one,
              show the no one "no one is here yet" screen. */}
             {!users &&
-                    <div className='center'>
-                        <h2 className='title'>Nobody is here...<br></br>yet 😋</h2>
-                        <button type="text" className="add_me_button" onClick={() => navigate(`/room/${roomID}/join`)}>Add my social</button>
-                    </div>
+                <div className='center'>
+                    <h2 className='title'>Nobody is here...<br></br>yet 😋</h2>
+                    <button type="text" className="add_me_button" onClick={() => navigate(`/room/${roomID}/join`)}>Add my social</button>
+                </div>
             }
             {/* This is the pop up for when you copy the room id */}
             <Snackbar

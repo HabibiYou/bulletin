@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { IconButton } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
+
 import './Home.css';
 
 import { db } from "./firebase/firebase"
@@ -50,6 +54,9 @@ const JoinRoom = () => {
 
         <div className='body'>
             <div className="form">
+                <IconButton onClick={() => { navigate(`/`) }}>
+                    <ArrowBackIcon className='back-button' />
+                </IconButton>
                 <div className="title text">Join a room</div>
                 <div className="subtitle text"></div>
                 <div className="input-container ic2">
@@ -57,7 +64,7 @@ const JoinRoom = () => {
                     note: r.target.value just is the value of the string inside the input at the moment.
                     So basically everytime they type a new letter it will call this and update the roomID
                     */}
-                    <input id="room" className="input" type="text" onChange={r => setRoomID(r.target.value.toLowerCase())} placeholder=" "  />
+                    <input id="room" className="input" type="text" onChange={r => setRoomID(r.target.value.toLowerCase())} placeholder=" " />
                     <div className="cut cut-long"></div>
                     <label htmlFor="room" className={placeholderText}>Room code</label>
                 </div>

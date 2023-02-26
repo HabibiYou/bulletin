@@ -22,8 +22,6 @@ function App() {
           <Route path='/room/:roomID' element={<Room />}></Route>
           <Route path='/room/:roomID/join' element={<JoinRoomWithInfo />}></Route>
           <Route path= '/*' element={<NotFound/>}></Route>
-
-
         </Routes>
 
       </div>

@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { IconButton, FormControl, FormControlLabel, FormLabel, FormGroup, FormHelperText, Checkbox, Box } from '@mui/material';
 import TipsAndUpdatesOutlinedIcon from '@mui/icons-material/TipsAndUpdatesOutlined';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-import {db} from "./firebase/firebase"
-import {set,ref, onValue} from "firebase/database"
+import { db } from "./firebase/firebase"
+import { set, ref, onValue } from "firebase/database"
 
 import './Home.css';
 
@@ -44,9 +45,9 @@ const CreateRoom = () => {
 
     //updates data
     const getRoomData = () => {
-        onValue(ref(db), (snapshot)=>{
+        onValue(ref(db), (snapshot) => {
             const snapshotData = snapshot.val();
-            if(snapshotData!==null){
+            if (snapshotData !== null) {
                 setData(snapshotData)
 
             }
@@ -116,7 +117,7 @@ const CreateRoom = () => {
     //Create Room with same params as the JSON
     const createRoom = () => {
         // data[roomID] = { roomName: `${newRoomName}`, socials:{instagram:instagram,snapchat:snapchat, twitter:twitter, tiktok:tiktok }, users: [] }
-            return { roomName: `${newRoomName}`, socials:{instagram:instagram,snapchat:snapchat, twitter:twitter, tiktok:tiktok }, users: [] }
+        return { roomName: `${newRoomName}`, socials: { instagram: instagram, snapchat: snapchat, twitter: twitter, tiktok: tiktok }, users: [] }
     }
 
 
@@ -138,14 +139,18 @@ const CreateRoom = () => {
 
     const addMyRoom = () => {
         //create
-        const r = createRoom() 
-        set(ref(db,`${roomID.toLowerCase()}`),r)
+        const r = createRoom()
+        set(ref(db, `${roomID.toLowerCase()}`), r)
         navigate(`/room/${roomID}`)
     }
 
     return (
         <div>
             <div className="form">
+                <IconButton onClick={()=>{navigate(`/`)}}>
+                    <ArrowBackIcon className='back-button' />
+                </IconButton>
+
                 <div className="title">Create a room</div>
                 <div className="subtitle"></div>
                 <div className="input-container ic1">
@@ -173,14 +178,14 @@ const CreateRoom = () => {
                         <FormGroup>
                             <FormControlLabel
                                 control={
-                                    <Checkbox name="instagram" checked={instagram} onChange={handleChecked} className="checkbox"/>
+                                    <Checkbox name="instagram" checked={instagram} onChange={handleChecked} className="checkbox" />
                                 }
                                 label="Instagram"
                                 className='form_item_text'
                             />
                             <FormControlLabel
                                 control={
-                                    <Checkbox name="twitter" checked={twitter} onChange={handleChecked} className="checkbox"/>
+                                    <Checkbox name="twitter" checked={twitter} onChange={handleChecked} className="checkbox" />
                                 }
                                 label="Twitter"
                                 className='form_item_text'

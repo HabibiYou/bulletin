@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import Button from '@mui/material/Button';
+import { Button, IconButton } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import { db } from "./firebase/firebase"
 
@@ -100,9 +101,12 @@ const JoinRoomWithInfo = () => {
 
 
     return (
-        
+
         <div className='body'>
             <div className="form">
+                <IconButton onClick={() => { navigate(`/join`) }}>
+                    <ArrowBackIcon className='back-button' />
+                </IconButton>
                 <div className="subtitle">Create a profile</div>
                 <div className="input-container ic1">
                     <input id="name" className="input" type="text" placeholder=" " onChange={(i) => setName(i.target.value)} />
