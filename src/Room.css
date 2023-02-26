@@ -13,6 +13,9 @@
 .icon-small{
   scale: 1.5;
 }
+.share-button{
+  text-align: center;
+}
 
 .copy_icon{
   scale: .6;

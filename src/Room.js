@@ -64,7 +64,7 @@ const Room = () => {
     const copy = async () => {
         console.log("copied")
         setCopied(true);
-        await navigator.clipboard.writeText(urlLink+`/room/${roomID}/join`);
+        await navigator.clipboard.writeText(urlLink + `/room/${roomID}/join`);
     }
 
     return (
@@ -75,13 +75,14 @@ const Room = () => {
                 <br></br>
                 {roomName}
             </div>
-
-            <Button size='small' onClick={() => copy()}>
-                <div className="subtitle">
-                    Room ID: {roomID}
-                    <ContentCopyIcon className='copy_icon' />
-                </div>
-            </Button>
+            <div className='center'>
+                <Button size='small' onClick={() => copy()}>
+                    <div className="subtitle">
+                        Room ID: {roomID}
+                        <ContentCopyIcon className='copy_icon' />
+                    </div>
+                </Button>
+            </div>
 
             {/* If the users exist and there is atleast one person,
              generate the users with the UserList component */}

@@ -99,6 +99,7 @@ const JoinRoomWithInfo = () => {
 
 
     return (
+        
         <div className='body'>
             <div className="form">
                 <div className="subtitle">Create a profile</div>

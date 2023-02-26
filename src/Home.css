@@ -24,7 +24,7 @@ body {
   background-color: var(--main_background);
   display: flex;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 95vh;
 }
 
 .form {
@@ -32,15 +32,15 @@ body {
   border-radius: 20px;
   box-sizing: border-box;
   height: fit-content;
-  min-height: 50%;
-  min-width: 320px;
-  width: 70%;
   padding: 20px;
+  width: 320px;
+  align-items: center;
 
 }
 
 .title {
   color:var(--main_text_color);
+  text-align: center;
   font-family: "alba";
   font-size: 36px;
   font-weight: 600;
@@ -48,9 +48,31 @@ body {
   letter-spacing: 1px !important;
 }
 
+.title-main {
+  color:var(--main_text_color);
+  font-family: "alba";
+  font-size: 50px;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 30px;
+  letter-spacing: 1px !important;
+}
+
+.title-secondary {
+  color:var(--main_text_color);
+  font-family: "alba";
+  font-size: 30px;
+  text-align: center;
+  font-weight: 600;
+  background-color: #af0b43;
+  border-radius: 20px;
+  letter-spacing: 1px !important;
+}
+
 .subtitle {
   color: var(--main_text_color);
-  font-family: sans-serif;
+  text-align: center;
+  font-family: "alba";
   font-size: 16px;
   font-weight: 600;
   margin-top: 10px;
@@ -114,7 +136,7 @@ body {
 
 .placeholder {
   color: var(--input_text_color);
-  font-family: sans-serif;
+  font-family: "alba";
   left: 20px;
   line-height: 14px;
   pointer-events: none;
@@ -182,25 +204,32 @@ body {
 }
 /* Check Boxes  */
 /* Override MUI */
-.checkbox > .MuiSvgIcon-root{
-  color:var(--list_item_background)
+.checkbox > .MuiSvgIcon-root {
+  color:var(--list_item_background);
+  font-family: "alba";
+
   }
 
 .iconButton > .MuiSvgIcon-root{
   fill:var(--list_item_background);
   align-items: center;}
 .form_helper_text{
+  font-family: "alba" !important;
   color:var(--main_text_color) !important;
 }
 
 .form_helper_text_incorrect {
+  font-family: "alba" !important;
   color: var(--main_text_color) !important;
 }
 .form_helper_text_correct {
+  font-family: "alba" !important;
   display: none I;
 }
 
 .form_item_text{
   color: var(--main_text_color) !important;
+  font-family: "alba" !important;
+  
 }
 
