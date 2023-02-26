@@ -57,7 +57,7 @@ const JoinRoom = () => {
                     note: r.target.value just is the value of the string inside the input at the moment.
                     So basically everytime they type a new letter it will call this and update the roomID
                     */}
-                    <input id="room" className="input" type="text" onChange={r => setRoomID(r.target.value.toLowerCase())} placeholder=" "  pattern="[a-zA-Z0-9]+"/>
+                    <input id="room" className="input" type="text" onChange={r => setRoomID(r.target.value.toLowerCase())} placeholder=" "  />
                     <div className="cut cut-long"></div>
                     <label htmlFor="room" className={placeholderText}>Room code</label>
                 </div>

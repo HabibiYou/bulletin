@@ -150,7 +150,7 @@ const CreateRoom = () => {
                 <div className="subtitle"></div>
                 <div className="input-container ic1">
                     <input id="room" className="input" type="text" placeholder=" " value={roomID}
-                        onChange={(r) => setRoomID(r.target.value)} />
+                        onChange={(r) => setRoomID(r.target.value)} pattern="[a-zA-Z0-9]+" />
                     <div className="cut cut-mid"></div>
                     <label htmlFor="room" className={placeholderText}>Room ID</label>
                 </div>
