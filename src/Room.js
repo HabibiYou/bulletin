@@ -92,15 +92,10 @@ const Room = () => {
             {/* If the users exist and there is no one,
              show the no one "no one is here yet" screen. */}
             {!users &&
-                <div className='listItem'>
                     <div className='center'>
-                        <h2 >Nobody is here...</h2>
-                        <h2 >yet!</h2>
-                        <img className='avatar' src={avatar} />
-                        <br></br>
+                        <h2 className='title'>Nobody is here...<br></br>yet 😋</h2>
                         <button type="text" className="add_me_button" onClick={() => navigate(`/room/${roomID}/join`)}>Add my social</button>
                     </div>
-                </div>
             }
             {/* This is the pop up for when you copy the room id */}
             <Snackbar
