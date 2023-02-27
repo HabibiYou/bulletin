@@ -11,17 +11,19 @@
 //     sixtyDays.setDate(sixtyDays.getDate()-60);
 
 //     var updates = {};
+//     functions.logger.info(database.ref());
+
 //     let del_ref = database.ref().orderByChild("dateCreated").startAt(thirtyDays.getTime()).endAt(sixtyDays.getTime());
 //     del_ref.once('value' ,(snapshot)=> {
 //         snapshot.forEach((child)=>{
 //             updates[child.key] =null;
 //         })
 //     }).then(()=>{
-//         console.log("UPDATES HERE",updates);
+//         functions.logger.info("UPDATES HERE",updates);
 //         database.ref().update(updates);
-//         console.log('This will be run every 1 minute!');
-//         console.log("DRR",del_ref);
-//         console.log("dbRRRR",database.ref());
+//         functions.logger.info('This will be run every 1 minute!');
+//         functions.logger.info("DRR",del_ref);
+//         functions.logger.info("dbRRRR",database.ref());
 //     });
 //     // del_ref.remove();
 

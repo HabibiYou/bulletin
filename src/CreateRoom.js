@@ -88,7 +88,7 @@ const CreateRoom = () => {
 
         if (roomID.length < 6 ||
             (data && data.hasOwnProperty(roomID)) ||
-            roomIdError ||
+            roomIdError == true ||
             minSocialsError == true ||
             maxSocialsError == true) {
             setCanCreate(false)

@@ -59,6 +59,7 @@ body {
   text-align: center;
   font-weight: 600;
   letter-spacing: 1px !important;
+  line-height:55px !important;
 }
 
 .title-secondary {
@@ -86,6 +87,8 @@ body {
   font-family: "alba";
   font-size: 24px;
   font-weight: 200;
+  line-height:35px !important;
+
 }
 
 .input-container {
