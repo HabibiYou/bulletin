@@ -27,6 +27,7 @@ const CreateRoom = () => {
     //states for social errors
     const [maxSocialsError, setMaxSocialsError] = useState(false)
     const [minSocialsError, setMinSocialsError] = useState(true)
+    const [roomIdError, setroomIdError] = useState(false)
 
     //states for each social check
     const { instagram, twitter, tiktok, snapchat } = socialstate
@@ -55,6 +56,13 @@ const CreateRoom = () => {
         });
     }
 
+    const isAlphaNumeric = (s) => {
+        const validRoomId = new RegExp('^[a-zA-Z0-9]*$')
+        let result = validRoomId.test(s);
+        setroomIdError(!result)
+        return result;
+    }
+
     //GET ROOM DATA AS SOON AS WE INIT
     // useEffect runs once bc no deps in the list
     useEffect(() => {
@@ -65,27 +73,33 @@ const CreateRoom = () => {
     // check and make sure room exist and is valid
     // change colors of roomID as necesarry 
     useEffect(() => {
-        if (roomID.length < 6 || (data && data[roomID])) {
+        if (roomID.length < 6 || (data && data[roomID]) || roomIdError) {
             setPlaceholderText("placeholder idle")
         }
         else {
             setPlaceholderText("placeholder correct")
         }
-    }, [roomID])
+    }, [roomID, roomIdError])
 
     // check all params and make sure it is valid
     useEffect(() => {
-        if (roomID.length < 6 || (data && data[roomID]) || minSocialsError == true || maxSocialsError == true) {
+        isAlphaNumeric(roomID)
+
+        if (roomID.length < 6 ||
+            (data && data[roomID]) ||
+            roomIdError ||
+            minSocialsError == true ||
+            maxSocialsError == true) {
             setCanCreate(false)
         }
         else {
             setCanCreate(true)
         }
 
-    }, [roomID, minSocialsError, maxSocialsError])
+    }, [roomID, roomIdError, minSocialsError, maxSocialsError])
 
 
-
+// min and max choice select errors check
     useEffect(() => {
         const totalChecked = [instagram, twitter, tiktok, snapchat].filter((v) => v).length
         if (totalChecked == 0) {
@@ -116,8 +130,7 @@ const CreateRoom = () => {
 
     //Create Room with same params as the JSON
     const createRoom = () => {
-        // data[roomID] = { roomName: `${newRoomName}`, socials:{instagram:instagram,snapchat:snapchat, twitter:twitter, tiktok:tiktok }, users: [] }
-        return { roomName: `${newRoomName}`, socials: { instagram: instagram, snapchat: snapchat, twitter: twitter, tiktok: tiktok }, users: [] }
+        return { roomName: `${newRoomName}`, socials: { instagram: instagram, snapchat: snapchat, twitter: twitter, tiktok: tiktok }, users: [], dateCreated: Date.now() }
     }
 
 
@@ -147,7 +160,7 @@ const CreateRoom = () => {
     return (
         <div>
             <div className="form">
-                <IconButton onClick={()=>{navigate(`/`)}}>
+                <IconButton onClick={() => { navigate(`/`) }}>
                     <ArrowBackIcon className='back-button' />
                 </IconButton>
 
@@ -160,6 +173,10 @@ const CreateRoom = () => {
                     <label htmlFor="room" className={placeholderText}>Room ID</label>
                 </div>
                 <div className='center'>
+                    {roomIdError &&
+                        <FormHelperText className="form_helper_text_incorrect">no spaces or special characters</FormHelperText>
+                    }
+
                     <IconButton color="primary" aria-label="generate room id" onClick={() => generateID()} className='iconButton'>
                         <TipsAndUpdatesOutlinedIcon />
                     </IconButton>
@@ -210,6 +227,7 @@ const CreateRoom = () => {
                         {maxSocialsError &&
                             <FormHelperText className="form_helper_text_incorrect">3 Choice Maximum</FormHelperText>
                         }
+
 
 
 
