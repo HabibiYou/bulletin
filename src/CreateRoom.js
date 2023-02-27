@@ -84,9 +84,10 @@ const CreateRoom = () => {
     // check all params and make sure it is valid
     useEffect(() => {
         isAlphaNumeric(roomID)
+        console.log(roomIdError)
 
         if (roomID.length < 6 ||
-            (data && data[roomID]) ||
+            (data && data.hasOwnProperty(roomID)) ||
             roomIdError ||
             minSocialsError == true ||
             maxSocialsError == true) {
@@ -96,7 +97,7 @@ const CreateRoom = () => {
             setCanCreate(true)
         }
 
-    }, [roomID, roomIdError, minSocialsError, maxSocialsError])
+    }, [data, roomID, roomIdError, minSocialsError, maxSocialsError])
 
 
 // min and max choice select errors check

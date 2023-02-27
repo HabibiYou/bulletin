@@ -80,6 +80,14 @@ body {
   font-weight: 600;
 }
 
+.subtitle-main {
+  color: var(--main_text_color);
+  text-align: center;
+  font-family: "alba";
+  font-size: 24px;
+  font-weight: 200;
+}
+
 .input-container {
   height: 50px;
   position: relative;
