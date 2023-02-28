@@ -64,7 +64,7 @@ const Room = () => {
     const copy = async () => {
         console.log("copied")
         setCopied(true);
-        await navigator.clipboard.writeText(urlLink + `/room/${roomID}/join`);
+        await navigator.clipboard.writeText(urlLink + `${roomID}/join`);
     }
 
     return (
@@ -97,7 +97,7 @@ const Room = () => {
             {!users &&
                 <div className='center'>
                     <h2 className='title'>Nobody is here...<br></br>yet 😋</h2>
-                    <button type="text" className="add_me_button" onClick={() => navigate(`/room/${roomID}/join`)}>Add my social</button>
+                    <button type="text" className="add_me_button" onClick={() => navigate(`/${roomID}/join`)}>Add my social</button>
                 </div>
             }
             {/* This is the pop up for when you copy the room id */}

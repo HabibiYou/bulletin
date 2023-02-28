@@ -85,7 +85,7 @@ const JoinRoomWithInfo = () => {
             const currentRoomData = ref(db, `${roomID}/users`);
             const newRoomData = push(currentRoomData);
             set(newRoomData, newUser);
-            navigate(`/room/${roomID}`)
+            navigate(`/${roomID}`)
         }
 
     }
@@ -136,7 +136,7 @@ const JoinRoomWithInfo = () => {
                 {allParamsFilled() && <button type="text" className="submit" onClick={() => addMeToRoom()}>Join</button>}
                 {!allParamsFilled() && <button type="text" className="submit" disabled >Join</button>}
                 <div className='center'>
-                    <Button variant="text" className='skip_button' onClick={() => navigate(`/room/${roomID}`)}>Join without adding</Button>
+                    <Button variant="text" className='skip_button' onClick={() => navigate(`/${roomID}`)}>Join without adding</Button>
                 </div>
             </div>
         </div>

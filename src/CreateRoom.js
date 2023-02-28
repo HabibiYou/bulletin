@@ -73,7 +73,11 @@ const CreateRoom = () => {
     // check and make sure room exist and is valid
     // change colors of roomID as necesarry 
     useEffect(() => {
-        if (roomID.length < 6 || (data && data[roomID]) || roomIdError) {
+        if (roomID.length < 6 ||
+             (data && data[roomID]) ||
+              roomIdError || 
+              roomID === "create" ||
+              roomID === "join") {
             setPlaceholderText("placeholder idle")
         }
         else {
@@ -88,9 +92,12 @@ const CreateRoom = () => {
 
         if (roomID.length < 6 ||
             (data && data.hasOwnProperty(roomID)) ||
-            roomIdError == true ||
-            minSocialsError == true ||
-            maxSocialsError == true) {
+            roomIdError === true ||
+            minSocialsError === true ||
+            maxSocialsError === true ||
+            roomID === "create" ||
+            roomID === "join"
+            ) {
             setCanCreate(false)
         }
         else {
@@ -155,7 +162,7 @@ const CreateRoom = () => {
         //create
         const r = createRoom()
         set(ref(db, `${roomID.toLowerCase()}`), r)
-        navigate(`/room/${roomID}`)
+        navigate(`/${roomID}`)
     }
 
     return (

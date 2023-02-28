@@ -72,7 +72,7 @@ const JoinRoom = () => {
                 {!canJoin && <button type="text" className="submit text" disabled>Join</button>}
                 {canJoin && <button type="text" className="submit text" onClick={() =>
 
-                    navigate(`/room/${roomID}/join`)}>Join</button>}
+                    navigate(`/${roomID}/join`)}>Join</button>}
 
                 <br></br>
             </div>

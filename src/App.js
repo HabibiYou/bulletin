@@ -19,8 +19,8 @@ function App() {
           <Route path='/' element={<Home />}></Route>
           <Route path='/join' element={<JoinRoom />}></Route>
           <Route path='/create' element={<CreateRoom />}></Route>
-          <Route path='/room/:roomID' element={<Room />}></Route>
-          <Route path='/room/:roomID/join' element={<JoinRoomWithInfo />}></Route>
+          <Route path='/:roomID' element={<Room />}></Route>
+          <Route path='/:roomID/join' element={<JoinRoomWithInfo />}></Route>
           <Route path= '/*' element={<NotFound/>}></Route>
         </Routes>
 
