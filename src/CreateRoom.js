@@ -161,8 +161,10 @@ const CreateRoom = () => {
     const addMyRoom = () => {
         //create
         const r = createRoom()
-        set(ref(db, `${roomID.toLowerCase()}`), r)
-        navigate(`/${roomID}`)
+        set(ref(db, `${roomID.toLowerCase()}`), r).then(()=>{
+            navigate(`/${roomID}`)
+        })
+        
     }
 
     return (
