@@ -1,0 +1,87 @@
+:root {
+  --form_background: #DF0E55;
+  --white_background: #fbfafa;
+  --button_background: #0BAF77;
+  --main_background: #AF0B43;
+  --listitem_background:#ffffff;
+}
+
+.icon{
+    scale: 1;    
+}
+
+.icon-small{
+  scale: 1.5;
+}
+.share-button{
+  text-align: center;
+}
+
+.share-button-text{
+  color: var(--main_text_color);
+  text-align: center;
+  font-family: "alba";
+  width: 100%;
+  padding: 3%;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+  background-color: #af0b43;
+  border-radius: 20px;
+}
+
+.copy_icon{
+  scale: .6;
+  padding-left: 5px;
+}
+
+.itemList{
+    align-items: center;
+}
+
+.main_background {
+    background-color: var(--form_background);
+    border-radius: 20px;
+    box-sizing: border-box;
+    height: fit-content;
+    padding: 20px;
+    width: 320px;
+    align-items: center;
+
+  }
+
+  .listItem{
+    background-color: var(--white_background);
+    border: 5px solid var(--main_background);
+    border-radius: 20px;
+    margin-top: 10px;
+    align-items: center;
+  }
+
+  .listItem-text {
+    font-weight: bold;
+    color: var(--main_background);
+  }
+
+  .center{
+    text-align: center;
+  }
+
+  .avatar{
+    scale:1.4;
+  }
+
+  .add_me_button{
+    background-color: var(--button_background);
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    color: #ffffff;
+    font-family: "alba";
+    cursor: pointer;
+    font-size: 24px;
+    height: 50px;
+    margin: 20px;
+    /* outline: 0; */
+    width: fit-content;
+  }

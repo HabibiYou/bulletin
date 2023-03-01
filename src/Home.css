@@ -1,0 +1,251 @@
+@font-face {
+  font-family: "alba";
+  src: local("GoldmanBold"),
+   url("./fonts/ALBA____.TTF") format("truetype");
+   
+  }
+
+:root {
+  --form_background: #af0b43;
+  --list_item_background: #fbfafa;
+  --button_background: #0BAF77;
+  --main_background: #ff7f7f;
+  --main_text_color: #eee;
+  --input_text_color: #af0b43;
+}
+
+.App {
+  text-align: center;
+}
+
+.back-button{
+  color: var(--list_item_background);
+  scale: 1.3;
+}
+
+
+body {
+  align-items: center;
+  background-color: var(--main_background);
+  display: flex;
+  justify-content: center;
+  min-height: 95vh;
+}
+
+.form {
+  background-color: var(--form_background);
+  border-radius: 20px;
+  box-sizing: border-box;
+  height: fit-content;
+  padding: 20px;
+  width: 320px;
+  align-items: center;
+
+}
+
+.title {
+  color:var(--main_text_color);
+  text-align: center;
+  font-family: "alba";
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: 1px !important;
+}
+
+.title-main {
+  color:var(--main_text_color);
+  font-family: "alba";
+  font-size: 48px;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 1px !important;
+  line-height:55px !important;
+}
+
+.title-secondary {
+  color:var(--main_text_color);
+  font-family: "alba";
+  font-size: 30px;
+  text-align: center;
+  font-weight: 600;
+  background-color: #af0b43;
+  border-radius: 20px;
+  letter-spacing: 1px !important;
+}
+
+.subtitle {
+  color: var(--main_text_color);
+  text-align: center;
+  font-family: "alba";
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.subtitle-main {
+  color: var(--main_text_color);
+  text-align: center;
+  font-family: "alba";
+  font-size: 24px;
+  font-weight: 200;
+  line-height:35px !important;
+
+}
+
+.input-container {
+  height: 50px;
+  position: relative;
+  width: 100%;
+}
+
+.ic1 {
+  margin-top: 20px;
+}
+
+.ic2 {
+  margin-top: 30px;
+}
+
+.input {
+  background-color: var(--list_item_background);
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: var(--input_text_color);
+  text-transform: lowercase;
+  font-size: 18px;
+  height: 100%;
+  outline: 0;
+  padding: 4px 20px 0;
+  width: 100%;
+}
+
+.cut {
+  background-color: var(--form_background);
+  border-radius: 10px;
+  height: 20px;
+  left: 20px;
+  position: absolute;
+  top: -20px;
+  transform: translateY(0);
+  transition: transform 200ms;
+  width: 76px;
+}
+
+.cut-short {
+  width: 60px;
+}
+
+.cut-mid {
+  width: 75px;
+}
+
+.cut-long {
+  width: 90px;
+}
+
+.input:focus ~ .cut,
+.input:not(:placeholder-shown) ~ .cut {
+  transform: translateY(8px);
+}
+
+.placeholder {
+  color: var(--input_text_color);
+  font-family: "alba";
+  left: 20px;
+  line-height: 14px;
+  pointer-events: none;
+  position: absolute;
+  transform-origin: 0 50%;
+  transition: transform 200ms, color 200ms;
+  top: 20px;
+}
+
+.input:focus ~ .placeholder,
+.input:not(:placeholder-shown) ~ .placeholder {
+  transform: translateY(-30px) translateX(10px) scale(0.8);
+}
+
+.input:not(:placeholder-shown) ~ .placeholder {
+  color: var(--main_text_color);
+}
+
+.input:focus ~ .idle {
+  color: var(--main_text_color);
+}
+
+.input:focus ~ .correct {
+  color: #64fe53;
+}
+
+.submit {
+  font-family: "alba";
+  background-color: var(--button_background);
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: var(--main_text_color);
+  cursor: pointer;
+  font-size: 24px;
+  height: 50px;
+  margin-top: 38px;
+  outline: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.submit:active {
+  background-color: var(--button_background);
+}
+
+.submit:disabled {
+  background-color: var(--main_background);
+}
+.center{
+  text-align: center;
+}
+.skip_button{
+  text-transform: unset !important;
+  font-size: 1px;
+  text-align: center;
+  font-family: "alba" !important;
+  color: var(--main_text_color) !important;
+
+}
+
+.generate_button{
+  text-transform: unset !important;
+  text-align: center;
+  color: var(--main_text_color);
+
+}
+/* Check Boxes  */
+/* Override MUI */
+.checkbox > .MuiSvgIcon-root {
+  color:var(--list_item_background);
+  font-family: "alba";
+
+  }
+
+.iconButton > .MuiSvgIcon-root{
+  fill:var(--list_item_background);
+  align-items: center;}
+.form_helper_text{
+  font-family: "alba" !important;
+  color:var(--main_text_color) !important;
+}
+
+.form_helper_text_incorrect {
+  font-family: "alba" !important;
+  color: var(--main_text_color) !important;
+}
+.form_helper_text_correct {
+  font-family: "alba" !important;
+  display: none I;
+}
+
+.form_item_text{
+  color: var(--main_text_color) !important;
+  font-family: "alba" !important;
+  
+}
+
