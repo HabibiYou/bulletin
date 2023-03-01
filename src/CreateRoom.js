@@ -88,8 +88,6 @@ const CreateRoom = () => {
     // check all params and make sure it is valid
     useEffect(() => {
         isAlphaNumeric(roomID)
-        console.log(roomIdError)
-
         if (roomID.length < 6 ||
             (data && data.hasOwnProperty(roomID)) ||
             roomIdError === true ||
