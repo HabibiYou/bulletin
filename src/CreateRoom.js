@@ -28,7 +28,6 @@ const CreateRoom = () => {
     const [maxSocialsError, setMaxSocialsError] = useState(false)
     const [minSocialsError, setMinSocialsError] = useState(true)
     const [roomIdError, setroomIdError] = useState(false)
-
     //states for each social check
     const { instagram, twitter, tiktok, snapchat } = socialstate
 
@@ -63,6 +62,21 @@ const CreateRoom = () => {
         return result;
     }
 
+    const isNotKeyword =() =>{
+        if (roomID === "create" || roomID === "join"){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    const isValidParam = ()=> {
+        isAlphaNumeric(roomID)
+        isNotKeyword()
+
+    }
+
     //GET ROOM DATA AS SOON AS WE INIT
     // useEffect runs once bc no deps in the list
     useEffect(() => {
@@ -75,9 +89,7 @@ const CreateRoom = () => {
     useEffect(() => {
         if (roomID.length < 6 ||
              (data && data[roomID]) ||
-              roomIdError || 
-              roomID === "create" ||
-              roomID === "join") {
+              roomIdError) {
             setPlaceholderText("placeholder idle")
         }
         else {
@@ -87,14 +99,12 @@ const CreateRoom = () => {
 
     // check all params and make sure it is valid
     useEffect(() => {
-        isAlphaNumeric(roomID)
+        isValidParam()
         if (roomID.length < 6 ||
             (data && data.hasOwnProperty(roomID)) ||
             roomIdError === true ||
             minSocialsError === true ||
-            maxSocialsError === true ||
-            roomID === "create" ||
-            roomID === "join"
+            maxSocialsError === true
             ) {
             setCanCreate(false)
         }
