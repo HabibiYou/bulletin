@@ -68,45 +68,55 @@ const Room = () => {
     }
 
     return (
-        <div className='main_background'>
-            <IconButton onClick={() => { navigate(`/`) }}>
-                <ArrowBackIcon className='back-button' />
-            </IconButton>
+        <div>
+            <head>
+                <meta property="og:title" content="Yo, add me!" />
+                <meta property="og:type" content="website" />
+                {/* CHANGE URL LINNK HERE */}
+                <meta property="og:image" content="./modules/res/YoAddMeLogo.png" />
+                {/* <meta property="og:url" content="" /> */}
+            </head>
+            <div className='main_background'>
+                <IconButton onClick={() => { navigate(`/`) }}>
+                    <ArrowBackIcon className='back-button' />
+                </IconButton>
 
-            <div className="title">
-                Welcome
-                <br></br>
-                {roomName}
-            </div>
-            <div className='share-button'>
-                <Button size='small' onClick={() => copy()}>
-                    <div className="share-button-text">
-                        Room ID: {roomID}
-                        {/* <ContentCopyIcon className='copy_icon' /> */}
-                    </div>
-                </Button>
-            </div>
-
-            {/* If the users exist and there is atleast one person,
-             generate the users with the UserList component */}
-            {users && Object.keys(users).length > 0 &&
-                <UserList users={users} socialMedias={socialMedias} />}
-
-            {/* If the users exist and there is no one,
-             show the no one "no one is here yet" screen. */}
-            {!users &&
-                <div className='center'>
-                    <h2 className='title'>Nobody is here...<br></br>yet 😋</h2>
-                    <button type="text" className="add_me_button" onClick={() => navigate(`/${roomID}/join`)}>Add my social</button>
+                <div className="title">
+                    Welcome
+                    <br></br>
+                    {roomName}
                 </div>
-            }
-            {/* This is the pop up for when you copy the room id */}
-            <Snackbar
-                open={copied}
-                autoHideDuration={1200}
-                onClose={() => setCopied(false)}
-                message="Copied Room Link!"
-            />
+                <div className='share-button'>
+                    <Button size='small' onClick={() => copy()}>
+                        <div className="share-button-text">
+                            Room ID: {roomID}
+                            {/* <ContentCopyIcon className='copy_icon' /> */}
+                        </div>
+                    </Button>
+                </div>
+
+
+                {/* If the users exist and there is atleast one person,
+             generate the users with the UserList component */}
+                {users && Object.keys(users).length > 0 &&
+                    <UserList users={users} socialMedias={socialMedias} />}
+
+                {/* If the users exist and there is no one,
+             show the no one "no one is here yet" screen. */}
+                {!users &&
+                    <div className='center'>
+                        <h2 className='title'>Nobody is here...<br></br>yet 😋</h2>
+                        <button type="text" className="add_me_button" onClick={() => navigate(`/${roomID}/join`)}>Add my social</button>
+                    </div>
+                }
+                {/* This is the pop up for when you copy the room id */}
+                <Snackbar
+                    open={copied}
+                    autoHideDuration={1200}
+                    onClose={() => setCopied(false)}
+                    message="Copied Room Link!"
+                />
+            </div>
         </div>
     );
 }

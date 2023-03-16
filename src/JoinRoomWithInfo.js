@@ -27,7 +27,7 @@ const JoinRoomWithInfo = () => {
 
     const navigate = useNavigate();
 
-    //updates data
+
     const getRoomData = () => {
         onValue(ref(db), (snapshot) => {
             const snapshotData = snapshot.val();

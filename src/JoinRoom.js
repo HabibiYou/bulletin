@@ -3,11 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import { IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
+import {getAuth,signInAnonymously } from "firebase/auth"
+
+
 
 import './Home.css';
 
 import { db } from "./firebase/firebase"
 import { onValue, ref } from "firebase/database";
+
+// //make sure they authenticated
+// const auth = getAuth();
+// signInAnonymously(auth);
 
 const JoinRoom = () => {
 
