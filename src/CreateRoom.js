@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { IconButton, FormControl, FormControlLabel, FormLabel, FormGroup, FormHelperText, Checkbox, Box } from '@mui/material';
+import { IconButton, FormControl, FormControlLabel, FormLabel, FormGroup, FormHelperText, Checkbox, Box, CircularProgress } from '@mui/material';
 import TipsAndUpdatesOutlinedIcon from '@mui/icons-material/TipsAndUpdatesOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { getAuth, signInAnonymously } from "firebase/auth"
 
 import { db } from "./firebase/firebase"
 import { set, ref, onValue } from "firebase/database"
@@ -40,19 +41,41 @@ const CreateRoom = () => {
     //this is for roomID error
     const [placeholderText, setPlaceholderText] = useState("placeholder text idle")
 
+    const [authenticated, setAuthenticated] = useState(false)
+
+
     const navigate = useNavigate();
+
+    // make sure they authenticated
+    const auth = getAuth();
+    signInAnonymously(auth)
+
+    useEffect(()=>{
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                setAuthenticated(true)
+                console.log("authenticated")
+            }
+    
+        });
+
+    },[]);
 
 
     //updates data
     const getRoomData = () => {
-        onValue(ref(db), (snapshot) => {
-            const snapshotData = snapshot.val();
-            if (snapshotData !== null) {
-                setData(snapshotData)
+        if (authenticated) {
+            onValue(ref(db), (snapshot) => {
+                const snapshotData = snapshot.val();
+                console.log(snapshotData)
+                if (snapshotData !== null) {
+                    setData(snapshotData)
 
-            }
+                }
 
-        });
+            });
+        }
+
     }
 
     const isAlphaNumeric = (s) => {
@@ -62,16 +85,16 @@ const CreateRoom = () => {
         return result;
     }
 
-    const isNotKeyword =() =>{
-        if (roomID === "create" || roomID === "join"){
+    const isNotKeyword = () => {
+        if (roomID === "create" || roomID === "join") {
             return false;
         }
-        else{
+        else {
             return true;
         }
     }
 
-    const isValidParam = ()=> {
+    const isValidParam = () => {
         isAlphaNumeric(roomID)
         isNotKeyword()
 
@@ -82,40 +105,44 @@ const CreateRoom = () => {
     useEffect(() => {
         getRoomData()
 
-    }, [])
+    }, [authenticated])
 
     // check and make sure room exist and is valid
     // change colors of roomID as necesarry 
-    useEffect(() => {
-        if (roomID.length < 6 ||
-             (data && data[roomID]) ||
-              roomIdError) {
-            setPlaceholderText("placeholder idle")
-        }
-        else {
-            setPlaceholderText("placeholder correct")
-        }
-    }, [roomID, roomIdError])
+    // useEffect(() => {
+    //     if (roomID.length < 6 ||
+    //         (data && data[roomID]) ||
+    //         roomIdError) {
+    //         setPlaceholderText("placeholder idle")
+    //     }
+    //     else {
+    //         setPlaceholderText("placeholder correct")
+    //     }
+    // }, [roomID, roomIdError])
 
     // check all params and make sure it is valid
     useEffect(() => {
-        isValidParam()
-        if (roomID.length < 6 ||
-            (data && data.hasOwnProperty(roomID)) ||
-            roomIdError === true ||
-            minSocialsError === true ||
-            maxSocialsError === true
+        if (authenticated) {
+            isValidParam()
+            if (roomID.length < 6 ||
+                (data && data.hasOwnProperty(roomID)) ||
+                roomIdError === true ||
+                minSocialsError === true ||
+                maxSocialsError === true
             ) {
-            setCanCreate(false)
+                setCanCreate(false)
+            }
+            else {
+                setCanCreate(true)
+            }
+
         }
-        else {
-            setCanCreate(true)
-        }
+
 
     }, [data, roomID, roomIdError, minSocialsError, maxSocialsError])
 
 
-// min and max choice select errors check
+    // min and max choice select errors check
     useEffect(() => {
         const totalChecked = [instagram, twitter, tiktok, snapchat].filter((v) => v).length
         if (totalChecked == 0) {
@@ -169,10 +196,10 @@ const CreateRoom = () => {
     const addMyRoom = () => {
         //create
         const r = createRoom()
-        set(ref(db, `${roomID.toLowerCase()}`), r).then(()=>{
+        set(ref(db, `${roomID.toLowerCase()}`), r).then(() => {
             navigate(`/${roomID}`)
         })
-        
+
     }
 
     return (
@@ -182,81 +209,94 @@ const CreateRoom = () => {
                     <ArrowBackIcon className='back-button' />
                 </IconButton>
 
-                <div className="title">Create a room</div>
-                <div className="subtitle"></div>
-                <div className="input-container ic1">
-                    <input id="room" className="input" type="text" placeholder=" " value={roomID}
-                        onChange={(r) => setRoomID(r.target.value)} pattern="[a-zA-Z0-9]+" />
-                    <div className="cut cut-mid"></div>
-                    <label htmlFor="room" className={placeholderText}>Room ID</label>
-                </div>
-                <div className='center'>
-                    {roomIdError &&
-                        <FormHelperText className="form_helper_text_incorrect">no spaces or special characters</FormHelperText>
-                    }
+                {!authenticated &&
+                    <div className='loading_container'>
+                        <CircularProgress className='loading_indicator' />
+                    </div>}
 
-                    <IconButton color="primary" aria-label="generate room id" onClick={() => generateID()} className='iconButton'>
-                        <TipsAndUpdatesOutlinedIcon />
-                    </IconButton>
-                </div>
-                <div className="input-container ic1">
-                    <input id="roomName" className="input" type="text" placeholder=" "
-                        onChange={(r) => setNewRoomName(r.target.value)} />
-                    <div className="cut cut-long"></div>
-                    <label htmlFor="roomName" className='placeholder idle'>Room Name</label>
-                </div>
-                <br></br>
+                {authenticated &&
+                    <div>
 
-                <Box sx={{ display: 'flex' }}>
-                    <FormControl component="fieldset" variant="standard">
-                        <div className="subtitle">Social options</div>
-                        <FormGroup>
-                            <FormControlLabel
-                                control={
-                                    <Checkbox name="instagram" checked={instagram} onChange={handleChecked} className="checkbox" />
+                        <div className="title">Create a room</div>
+                        <div className="subtitle"></div>
+                        <div className="input-container ic1">
+                            <input id="room" className="input" type="text" placeholder=" " value={roomID}
+                                onChange={(r) => setRoomID(r.target.value)} pattern="[a-zA-Z0-9]+" />
+                            <div className="cut cut-mid"></div>
+                            <label htmlFor="room" className={placeholderText}>Room ID</label>
+                        </div>
+                        <div className='center'>
+                            {roomIdError &&
+                                <FormHelperText className="form_helper_text_incorrect">no spaces or special characters</FormHelperText>
+                            }
+
+                            <IconButton color="primary" aria-label="generate room id" onClick={() => generateID()} className='iconButton'>
+                                <TipsAndUpdatesOutlinedIcon />
+                            </IconButton>
+                        </div>
+                        <div className="input-container ic1">
+                            <input id="roomName" className="input" type="text" placeholder=" "
+                                onChange={(r) => setNewRoomName(r.target.value)} />
+                            <div className="cut cut-long"></div>
+                            <label htmlFor="roomName" className='placeholder idle'>Room Name</label>
+                        </div>
+                        <br></br>
+
+                        <Box sx={{ display: 'flex' }}>
+                            <FormControl component="fieldset" variant="standard">
+                                <div className="subtitle">Social options</div>
+                                <FormGroup>
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox name="instagram" checked={instagram} onChange={handleChecked} className="checkbox" />
+                                        }
+                                        label="Instagram"
+                                        className='form_item_text'
+                                    />
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox name="twitter" checked={twitter} onChange={handleChecked} className="checkbox" />
+                                        }
+                                        label="Twitter"
+                                        className='form_item_text'
+                                    />
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox name="tiktok" checked={tiktok} onChange={handleChecked} className="checkbox" />
+                                        }
+                                        label="TikTok"
+                                        className='form_item_text'
+                                    />
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox name="snapchat" checked={snapchat} onChange={handleChecked} className="checkbox" />
+                                        }
+                                        label="Snapchat"
+                                        className='form_item_text'
+                                    />
+                                </FormGroup>
+                                {minSocialsError &&
+                                    <FormHelperText className="form_helper_text_incorrect" >1 Choice Minimum!</FormHelperText>}
+                                {maxSocialsError &&
+                                    <FormHelperText className="form_helper_text_incorrect">3 Choice Maximum</FormHelperText>
                                 }
-                                label="Instagram"
-                                className='form_item_text'
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox name="twitter" checked={twitter} onChange={handleChecked} className="checkbox" />
-                                }
-                                label="Twitter"
-                                className='form_item_text'
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox name="tiktok" checked={tiktok} onChange={handleChecked} className="checkbox" />
-                                }
-                                label="TikTok"
-                                className='form_item_text'
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox name="snapchat" checked={snapchat} onChange={handleChecked} className="checkbox" />
-                                }
-                                label="Snapchat"
-                                className='form_item_text'
-                            />
-                        </FormGroup>
-                        {minSocialsError &&
-                            <FormHelperText className="form_helper_text_incorrect" >1 Choice Minimum!</FormHelperText>}
-                        {maxSocialsError &&
-                            <FormHelperText className="form_helper_text_incorrect">3 Choice Maximum</FormHelperText>
-                        }
 
 
 
 
-                    </FormControl>
+                            </FormControl>
 
 
-                </Box>
+                        </Box>
 
-                <br></br>
-                {!canCreate && <button type="text" className="submit" disabled >Create</button>}
-                {canCreate && <button type="text" className="submit" onClick={() => addMyRoom()} >Create</button>}
+                        <br></br>
+                        {!canCreate && <button type="text" className="submit" disabled >Create</button>}
+                        {canCreate && <button type="text" className="submit" onClick={() => addMyRoom()} >Create</button>}
+
+
+
+                    </div>
+                }
 
 
             </div>

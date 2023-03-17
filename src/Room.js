@@ -5,12 +5,15 @@ import { useNavigate } from 'react-router-dom'
 import './Room.css';
 import avatar from './modules/res/smile_face_icon.png'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import { Button, Snackbar, IconButton } from '@mui/material';
+import { Button, Snackbar,CircularProgress, IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import UserList from './modules/UserList'
 
 import { db } from "./firebase/firebase"
 import { onValue, ref } from "firebase/database";
+
+import { getAuth, signInAnonymously } from "firebase/auth"
+
 
 
 
@@ -31,26 +34,47 @@ const Room = () => {
     const [users, setUsers] = useState(null); // the list of users  
     const [socialMedias, setSocialMedias] = useState([])
 
+    const [authenticated, setAuthenticated] = useState(false)
+
+
     const navigate = useNavigate();
+
+    // make sure they authenticated
+    const auth = getAuth();
+    signInAnonymously(auth)
+
+    useEffect(()=>{
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                setAuthenticated(true)
+                console.log("authenticated")
+    
+            }
+    
+        });
+
+    },[]);
 
 
     const getRoomData = () => {
-        onValue(ref(db), (snapshot) => {
-            const snapshotData = snapshot.val();
-            const data = snapshotData[roomID]
-            if (data) {
-                if (data.hasOwnProperty("users")) {
-                    setUsers(data.users)
+        if (authenticated) {
+            onValue(ref(db), (snapshot) => {
+                const snapshotData = snapshot.val();
+                const data = snapshotData[roomID]
+                if (data) {
+                    if (data.hasOwnProperty("users")) {
+                        setUsers(data.users)
+                    }
+                    setSocialMedias(data.socials)
+                    setRoomName(data.roomName)
                 }
-                setSocialMedias(data.socials)
-                setRoomName(data.roomName)
-            }
-            else {
-                navigate(`/room-not-found`)
+                else {
+                    navigate(`/room-not-found`)
 
-            }
+                }
 
-        });
+            });
+        }
     }
 
     //This happens once in the beggining, because it happens 
@@ -58,7 +82,7 @@ const Room = () => {
     useEffect(() => {
         getRoomData()
 
-    }, []);
+    }, [authenticated]);
 
     //This is the function to copy strings to the keyboard
     const copy = async () => {
@@ -69,53 +93,53 @@ const Room = () => {
 
     return (
         <div>
-            <head>
-                <meta property="og:title" content="Yo, add me!" />
-                <meta property="og:type" content="website" />
-                {/* CHANGE URL LINNK HERE */}
-                <meta property="og:image" content="./modules/res/YoAddMeLogo.png" />
-                {/* <meta property="og:url" content="" /> */}
-            </head>
             <div className='main_background'>
                 <IconButton onClick={() => { navigate(`/`) }}>
                     <ArrowBackIcon className='back-button' />
                 </IconButton>
 
-                <div className="title">
-                    Welcome
-                    <br></br>
-                    {roomName}
-                </div>
-                <div className='share-button'>
-                    <Button size='small' onClick={() => copy()}>
-                        <div className="share-button-text">
-                            Room ID: {roomID}
-                            {/* <ContentCopyIcon className='copy_icon' /> */}
+                {!authenticated &&
+                    <div className='loading_container'>
+                        <CircularProgress className='loading_indicator' />
+                    </div>}
+                {authenticated &&
+                    <div>
+                        <div className="title">
+                            Welcome
+                            <br></br>
+                            {roomName}
                         </div>
-                    </Button>
-                </div>
+                        <div className='share-button'>
+                            <Button size='small' onClick={() => copy()}>
+                                <div className="share-button-text">
+                                    Room ID: {roomID}
+                                    {/* <ContentCopyIcon className='copy_icon' /> */}
+                                </div>
+                            </Button>
+                        </div>
+                        {/* If the users exist and there is atleast one person,
+                        generate the users with the UserList component */}
+                        {users && Object.keys(users).length > 0 &&
+                            <UserList users={users} socialMedias={socialMedias} />}
 
+                        {/* If the users exist and there is no one,
+                         show the no one "no one is here yet" screen. */}
+                        {!users &&
+                            <div className='center'>
+                                <h2 className='title'>Nobody is here...<br></br>yet 😋</h2>
+                                <button type="text" className="add_me_button" onClick={() => navigate(`/${roomID}/join`)}>Add my social</button>
+                            </div>
+                        }
+                        {/* This is the pop up for when you copy the room id */}
+                        <Snackbar
+                            open={copied}
+                            autoHideDuration={1200}
+                            onClose={() => setCopied(false)}
+                            message="Copied Room Link!"
+                        />
 
-                {/* If the users exist and there is atleast one person,
-             generate the users with the UserList component */}
-                {users && Object.keys(users).length > 0 &&
-                    <UserList users={users} socialMedias={socialMedias} />}
+                    </div>}
 
-                {/* If the users exist and there is no one,
-             show the no one "no one is here yet" screen. */}
-                {!users &&
-                    <div className='center'>
-                        <h2 className='title'>Nobody is here...<br></br>yet 😋</h2>
-                        <button type="text" className="add_me_button" onClick={() => navigate(`/${roomID}/join`)}>Add my social</button>
-                    </div>
-                }
-                {/* This is the pop up for when you copy the room id */}
-                <Snackbar
-                    open={copied}
-                    autoHideDuration={1200}
-                    onClose={() => setCopied(false)}
-                    message="Copied Room Link!"
-                />
             </div>
         </div>
     );

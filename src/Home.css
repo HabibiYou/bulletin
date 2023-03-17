@@ -37,6 +37,7 @@ body {
   border-radius: 20px;
   box-sizing: border-box;
   height: fit-content;
+  min-height: 300px;
   padding: 20px;
   width: 320px;
   align-items: center;
@@ -247,5 +248,18 @@ body {
   color: var(--main_text_color) !important;
   font-family: "alba" !important;
   
+}
+
+.loading_indicator{
+  color: var(--main_text_color) !important;
+  align-content: center;
+
+}
+
+.loading_container{
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
