@@ -35,9 +35,7 @@ const JoinRoom = () => {
     useEffect(()=>{
         auth.onAuthStateChanged((user) => {
             if (user) {
-                setAuthenticated(true)
-                console.log("authenticated")
-    
+                setAuthenticated(true)    
             }
     
         });

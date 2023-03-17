@@ -54,7 +54,6 @@ const CreateRoom = () => {
         auth.onAuthStateChanged((user) => {
             if (user) {
                 setAuthenticated(true)
-                console.log("authenticated")
             }
     
         });

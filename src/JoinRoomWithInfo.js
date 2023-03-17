@@ -40,7 +40,6 @@ const JoinRoomWithInfo = () => {
         auth.onAuthStateChanged((user) => {
             if (user) {
                 setAuthenticated(true)
-                console.log("authenticated")
     
             }
     
@@ -54,7 +53,6 @@ const JoinRoomWithInfo = () => {
         if (authenticated) {
             onValue(ref(db), (snapshot) => {
                 const snapshotData = snapshot.val();
-                console.log(snapshotData);
                 if (snapshotData !== null) {
                     if (snapshotData.hasOwnProperty(roomID)) {
                         setSocialMedias(snapshotData[roomID].socials)

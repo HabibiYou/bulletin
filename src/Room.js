@@ -47,7 +47,6 @@ const Room = () => {
         auth.onAuthStateChanged((user) => {
             if (user) {
                 setAuthenticated(true)
-                console.log("authenticated")
     
             }
     
@@ -86,7 +85,6 @@ const Room = () => {
 
     //This is the function to copy strings to the keyboard
     const copy = async () => {
-        console.log("copied")
         setCopied(true);
         await navigator.clipboard.writeText(urlLink + `${roomID}/join`);
     }
